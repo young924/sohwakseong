@@ -2,6 +2,11 @@
 # Created by https://www.toptal.com/developers/gitignore/api/django,react,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,react,macos
 
+# 추가
+Pipfile.lock
+Pipfile
+migrations
+
 ### Django ###
 *.log
 *.pot
