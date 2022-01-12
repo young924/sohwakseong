@@ -8,7 +8,9 @@ coverage==5.3
 coveralls==3.3.0
 distlib==0.3.2
 Django==3.2.6
+django-cors-headers==3.11.0
 django-environ==0.8.1
+djangorestframework==3.13.1
 docopt==0.6.2
 filelock==3.0.12
 idna==3.0
