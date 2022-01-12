@@ -5,7 +5,6 @@
 # 추가
 Pipfile.lock
 Pipfile
-migrations
 
 ### Django ###
 *.log
