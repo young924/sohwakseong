@@ -4,6 +4,7 @@ import spaceImg from "../../assets/image/space.jpg";
 import Loading from "./components/Loading";
 import Planet from "./components/Planet";
 import * as S from "./style";
+import Header from "../../components/Header";
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -47,57 +48,62 @@ function Home() {
   };
 
   return (
-    <S.Container clickedIndex={clickedIndex}>
-      {isLoading && <Loading />}
+    <>
+      <Header type="home" />
+      <S.Container clickedIndex={clickedIndex}>
+        {isLoading && <Loading />}
 
-      <Pannellum
-        ref={panImage}
-        width="420px"
-        height="100vh"
-        image={spaceImg}
-        pitch={position.pitch}
-        yaw={position.yaw}
-        hfov={position.hfov}
-        maxHfov={130}
-        minHfov={50}
-        autoLoad
-        showZoomCtrl={false}
-        onLoad={() => setIsLoading(false)}
-        showFullscreenCtrl={false}
-        hotSpotDebug
-        onMouseup={(event) => {
-          setPosition(() => ({
-            hfov: panImage.current.getViewer().getConfig().hfov,
-            pitch: panImage.current.getViewer().getConfig().pitch,
-            yaw: panImage.current.getViewer().getConfig().yaw,
-          }));
+        <Pannellum
+          ref={panImage}
+          width="420px"
+          height="100vh"
+          image={spaceImg}
+          pitch={position.pitch}
+          yaw={position.yaw}
+          hfov={position.hfov}
+          maxHfov={130}
+          minHfov={50}
+          autoLoad
+          showZoomCtrl={false}
+          onLoad={() => setIsLoading(false)}
+          showFullscreenCtrl={false}
+          hotSpotDebug
+          onMouseup={(event) => {
+            setPosition(() => ({
+              hfov: panImage.current.getViewer().getConfig().hfov,
+              pitch: panImage.current.getViewer().getConfig().pitch,
+              yaw: panImage.current.getViewer().getConfig().yaw,
+            }));
 
-          setStarList((prev) => [
-            ...prev,
-            {
-              pitch: panImage.current.getViewer().mouseEventToCoords(event)[0],
-              yaw: panImage.current.getViewer().mouseEventToCoords(event)[1],
-            },
-          ]);
+            setStarList((prev) => [
+              ...prev,
+              {
+                pitch: panImage.current
+                  .getViewer()
+                  .mouseEventToCoords(event)[0],
+                yaw: panImage.current.getViewer().mouseEventToCoords(event)[1],
+              },
+            ]);
 
-          setIsLoading(true);
-        }}
-      >
-        {starList.map((star, index) => (
-          <Pannellum.Hotspot
-            type="custom"
-            pitch={star.pitch}
-            yaw={star.yaw}
-            handleClick={(evt, index) => setClickedIndex(() => index)}
-            handleClickArg={Number(index + 1)}
-            cssClass={`done${String(index + 1)} done`}
-            tooltip={CreatDoneHotspot}
-            tooltipArg={{ title: "미라클 모닝 7am" }}
-          />
-        ))}
-      </Pannellum>
-      <Planet />
-    </S.Container>
+            setIsLoading(true);
+          }}
+        >
+          {starList.map((star, index) => (
+            <Pannellum.Hotspot
+              type="custom"
+              pitch={star.pitch}
+              yaw={star.yaw}
+              handleClick={(evt, index) => setClickedIndex(() => index)}
+              handleClickArg={Number(index + 1)}
+              cssClass={`done${String(index + 1)} done`}
+              tooltip={CreatDoneHotspot}
+              tooltipArg={{ title: "미라클 모닝 7am" }}
+            />
+          ))}
+        </Pannellum>
+        <Planet />
+      </S.Container>
+    </>
   );
 }
 
