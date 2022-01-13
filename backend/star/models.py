@@ -4,12 +4,12 @@ from django.conf import settings
 
 class StarItem(models.Model):
     # 별마켓에 등록되는 소확성
-    title = models.CharField(max_length=100)
-    emoticon = models.CharField(max_length=1)
+    title = models.CharField(unique=True, max_length=100)
+    emoticon = models.CharField(max_length=2)
 
 
 class Star(models.Model):
-    # 별마켓에서 별을 담을 때 생성되는 소확성
+    # 별마켓에서 담은 소확성
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -22,9 +22,8 @@ class Star(models.Model):
         )
     target_number = models.IntegerField()
     is_completed = models.BooleanField(default=False)
-    coordinate1 = models.FloatField(null=True, blank=True)
-    coordinate2 = models.FloatField(null=True, blank=True)
-    
+    yaw = models.FloatField(null=True, blank=True)
+    pitch = models.FloatField(null=True, blank=True)
 
 
 class DailyAchv(models.Model):
