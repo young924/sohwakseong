@@ -7,7 +7,7 @@ const Modal = ({
   isOpen,
   setIsOpen,
   children,
-  closeButton = true,
+  closeButton = false,
   style = { padding: "4rem" },
   styleInWhiteBox = { padding: "2.4rem" },
 }) => {
