@@ -12,9 +12,19 @@ export const Container = styled.section`
   > img {
     ${({ clickedIndex }) => css`
       &:nth-child(${clickedIndex}) {
-        filter: drop-shadow(0px 0px 2.3rem rgba(255, 255, 255, 1));
+        filter: drop-shadow(0px 0px 2rem rgba(255, 255, 255, 1));
       }
     `}
+
+    ${({ clickedIndex }) =>
+      clickedIndex === 1 &&
+      css`
+        &:nth-child(${clickedIndex}) {
+          top: 0rem;
+
+          filter: drop-shadow(0px 0px 1rem rgba(255, 255, 255, 1));
+        }
+      `}
   }
 `;
 
@@ -28,6 +38,7 @@ export const Prince = styled.img`
   right: 15rem;
   position: absolute;
   cursor: pointer;
+  transition: all 0.2s linear;
 `;
 
 export const Fox = styled.img`
@@ -40,16 +51,18 @@ export const Fox = styled.img`
   left: 15rem;
   position: absolute;
   cursor: pointer;
+  transition: all 0.2s linear;
 `;
 
 export const Star = styled.img`
   width: 5.4rem;
   height: 21.3rem;
-  top: 0;
+  top: -1rem;
   margin: auto;
   right: 0;
   left: 250px;
   position: fixed;
+  transition: all 0.2s linear;
   cursor: pointer;
 `;
 

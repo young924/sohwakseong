@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Pannellum } from "pannellum-react";
 import spaceImg from "../../assets/image/space.jpg";
 import Loading from "./components/Loading";
+import Planet from "./components/Planet";
+import * as S from "./style";
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -10,14 +12,42 @@ function Home() {
     { yaw: 10, pitch: 100 },
     { yaw: 10, pitch: 120 },
   ]);
+  const [clickedIndex, setClickedIndex] = useState(0);
 
   const panImage = useRef(null);
-  // useEffect(() => {
-  //   console.log(position);
-  // }, [position]);
+
+  useEffect(() => {
+    // 별 정보 3초 보여주는 로직
+    if (clickedIndex > 0) {
+      const timer = setTimeout(() => {
+        setClickedIndex(0);
+      }, [3000]);
+    }
+  }, [clickedIndex]);
+
+  const CreatDoneHotspot = (hotSpotDiv, args) => {
+    const starDiv = document.createElement("div");
+    starDiv.classList.add("star");
+    hotSpotDiv.appendChild(starDiv);
+    starDiv.style.width = "2rem";
+    starDiv.style.height = "2rem";
+    starDiv.style.boxShadow = "0px 0px 6px 2px #8A8686";
+    starDiv.style.backgroundColor = "#8A8686";
+    starDiv.style.borderRadius = "50%";
+    const line = document.createElement("div");
+    line.classList.add("line");
+    hotSpotDiv.appendChild(line);
+    const starInfo = document.createElement("p");
+    starInfo.innerHTML = args.title;
+    hotSpotDiv.appendChild(starInfo);
+    // starInfo.style.marginLeft =
+    //   -(starInfo.scrollWidth - starDiv.offsetWidth) / 2 + "px";
+    // starInfo.style.marginTop = -starInfo.scrollHeight - 12 + "px";
+    starInfo.style.display = "none";
+  };
 
   return (
-    <>
+    <S.Container clickedIndex={clickedIndex}>
       {isLoading && <Loading />}
 
       <Pannellum
@@ -53,18 +83,21 @@ function Home() {
           setIsLoading(true);
         }}
       >
-        {starList.map((star) => (
+        {starList.map((star, index) => (
           <Pannellum.Hotspot
             type="custom"
             pitch={star.pitch}
             yaw={star.yaw}
-            handleClick={(evt, name) => console.log(name)}
-            handleClickArg={"냠냠"}
-            cssClass={"Ryoung"}
+            handleClick={(evt, index) => setClickedIndex(() => index)}
+            handleClickArg={Number(index + 1)}
+            cssClass={`done${String(index + 1)} done`}
+            tooltip={CreatDoneHotspot}
+            tooltipArg={{ title: "미라클 모닝 7am" }}
           />
         ))}
       </Pannellum>
-    </>
+      <Planet />
+    </S.Container>
   );
 }
 
