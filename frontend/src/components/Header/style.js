@@ -45,13 +45,25 @@ export const IconBox = styled.div`
 `;
 
 export const SearchBox = styled.div`
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
-  top: 2rem;
+  top: 1.6rem;
   right: 0;
   left: 346px;
   margin: auto;
   z-index: 10000;
   cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  > svg {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
 `;
