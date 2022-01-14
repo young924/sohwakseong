@@ -5,7 +5,6 @@ export const HeaderBoard = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* z-index: 999; */
 
   width: 100%;
   max-width: 420px;
@@ -29,7 +28,10 @@ export const IconsWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  font-size: 1.6rem;
+  > h1 {
+    font-size: 2rem;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.82);
+  }
 `;
 
 export const IconBox = styled.div`
