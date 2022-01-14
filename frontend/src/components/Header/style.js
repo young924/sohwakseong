@@ -8,7 +8,7 @@ export const HeaderBoard = styled.div`
 
   width: 100%;
   max-width: 420px;
-  height: 4.8rem;
+  height: 5.2rem;
   padding: 1.2rem 1.6rem;
   z-index: 20;
   font-size: 1.6rem;
@@ -19,7 +19,7 @@ export const HeaderBoard = styled.div`
 
 export const HeaderWhiteSpace = styled.div`
   width: 100%;
-  height: 4.8rem;
+  height: 5.2rem;
   background: none;
 `;
 
@@ -31,6 +31,7 @@ export const IconsWrapper = styled.div`
   > h1 {
     font-size: 2rem;
     text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.82);
+    margin: 0.4rem 0 0 0;
   }
 `;
 
@@ -40,10 +41,18 @@ export const IconBox = styled.div`
   justify-content: center;
   align-items: center;
   user-select: none;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
 
   cursor: pointer;
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  > svg {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
 `;
 
 export const SearchBox = styled.div`
