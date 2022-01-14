@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { ReactComponent as SearchSVG } from "../../assets/icon/search.svg";
 import { ReactComponent as HomeSVG } from "../../assets/icon/home.svg";
 import { ReactComponent as LogoutSVG } from "../../assets/icon/logout.svg";
+import { ReactComponent as PlusSVG } from "../../assets/icon/plus.svg";
 import * as S from "./style";
 
 function Header({ type = "home", content = "", handleButton, handleButton2 }) {
@@ -33,7 +34,7 @@ function Header({ type = "home", content = "", handleButton, handleButton2 }) {
           <S.HeaderWhiteSpace />
         </>
       );
-    case "achieveCheck":
+    case "market":
       return (
         <>
           <S.HeaderBoard>
@@ -42,7 +43,9 @@ function Header({ type = "home", content = "", handleButton, handleButton2 }) {
                 <HomeSVG />
               </S.IconBox>
               <h1>{content}</h1>
-              <S.IconBox />
+              <S.IconBox onClick={handleButton}>
+                <PlusSVG />
+              </S.IconBox>
             </S.IconsWrapper>
           </S.HeaderBoard>
           <S.HeaderWhiteSpace />
