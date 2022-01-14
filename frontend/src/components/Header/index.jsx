@@ -34,6 +34,21 @@ function Header({ type = "home", content = "", handleButton, handleButton2 }) {
           <S.HeaderWhiteSpace />
         </>
       );
+    case "achieveCheck":
+      return (
+        <>
+          <S.HeaderBoard>
+            <S.IconsWrapper>
+              <S.IconBox onClick={() => history.push("/")}>
+                <HomeSVG />
+              </S.IconBox>
+              <h1>{content}</h1>
+              <S.IconBox />
+            </S.IconsWrapper>
+          </S.HeaderBoard>
+          <S.HeaderWhiteSpace />
+        </>
+      );
     case "market":
       return (
         <>

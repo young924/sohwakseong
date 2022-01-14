@@ -16,8 +16,7 @@ function MyPage() {
       <Header
         type="mypage"
         content="나의 소확성"
-        handleButton={() => history.push("/")}
-        handleButton2={() => setIsLogoutModalOn(true)}
+        handleButton={() => setIsLogoutModalOn(true)}
       />
       <LogoutModal isOpen={isLogoutModalOn} setIsOpen={setIsLogoutModalOn} />
       <S.Container>
