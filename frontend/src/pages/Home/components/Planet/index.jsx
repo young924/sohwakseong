@@ -11,7 +11,6 @@ function Planet() {
   const history = useHistory();
   const handleClick = useCallback(
     (index) => {
-      console.log("클릭");
       if (index !== clickedIndex) {
         setClickedIndex(() => index);
         return;

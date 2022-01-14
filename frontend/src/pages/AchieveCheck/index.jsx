@@ -10,9 +10,7 @@ function AchieveCheck() {
   const [selectedDate, setSelectedDate] = useState(
     dayjs(new Date()).format("YYYY-MM-DD")
   );
-  useEffect(() => {
-    console.log(selectedDate);
-  }, [selectedDate]);
+
   return (
     <PageLayout>
       <Header type="achieveCheck" content="성취 확인표" />
