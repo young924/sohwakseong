@@ -1,13 +1,13 @@
 import React, { useCallback } from "react";
-import { useBodyScrollLock } from "../../../hooks/useBodyScrollLock";
+import { useBodyScrollLock } from "../../hooks/useBodyScrollLock";
 import * as S from "./style";
-import { useModalHandler } from "../../../hooks/useModalHandler";
+import { useModalHandler } from "../../hooks/useModalHandler";
 
 const Modal = ({
   isOpen,
   setIsOpen,
   children,
-  closeButton = true,
+  closeButton = false,
   style = { padding: "4rem" },
   styleInWhiteBox = { padding: "2.4rem" },
 }) => {
