@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import * as S from "./style";
 
 const numberOfStars = 200;
@@ -6,8 +6,7 @@ const twinkleFrequencyMinimum = 2;
 const twinkleFrequencyMaximum = 6;
 
 function PageLayout({ children }) {
-  const [timerIsActive, setTimerIsActive] = useState(false);
-  const constructUniverse = () => {
+  const constructUniverse = useCallback(() => {
     const mainWidth = document.getElementsByTagName("main")[0].scrollWidth;
     const mainHeight = document.getElementsByTagName("main")[0].scrollHeight;
 
@@ -35,7 +34,7 @@ function PageLayout({ children }) {
       ); // twinkle duration
       stars[i].style.animationDuration = randNum + "s";
     }
-  };
+  }, []);
 
   const outputStars = () => {
     let starCollection = document.getElementsByClassName("star");
@@ -52,7 +51,7 @@ function PageLayout({ children }) {
 
   useEffect(() => {
     outputStars();
-  }, [timerIsActive]);
+  }, []);
 
   return <S.Container>{children}</S.Container>;
 }

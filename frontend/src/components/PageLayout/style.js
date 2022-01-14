@@ -5,7 +5,7 @@ const starAnim = keyframes`
         opacity: 1;
     }
     50% {
-        opacity: 0.2;
+        opacity: 0.1;
     }
     100% {
         opacity: 1;
