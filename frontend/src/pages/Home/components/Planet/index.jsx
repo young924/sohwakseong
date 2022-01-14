@@ -33,6 +33,14 @@ function Planet() {
     [clickedIndex]
   );
 
+  useEffect(() => {
+    if (clickedIndex > 0) {
+      setTimeout(() => {
+        setClickedIndex(0);
+      }, 5000);
+    }
+  }, [clickedIndex]);
+
   return (
     <S.Container clickedIndex={clickedIndex}>
       <S.Star src={starImg} onClick={() => handleClick(1)} />
