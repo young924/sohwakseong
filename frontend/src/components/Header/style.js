@@ -50,8 +50,8 @@ export const IconBox = styled.div`
     background: rgba(255, 255, 255, 0.3);
   }
   > svg {
-    width: 2.4rem;
-    height: 2.4rem;
+    width: 2.8rem;
+    height: 2.8rem;
   }
 `;
 
@@ -74,7 +74,7 @@ export const SearchBox = styled.div`
     background: rgba(255, 255, 255, 0.3);
   }
   > svg {
-    width: 2.4rem;
-    height: 2.4rem;
+    width: 2.8rem;
+    height: 2.8rem;
   }
 `;

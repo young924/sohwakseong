@@ -21,13 +21,28 @@ function Header({ type = "home", content = "", handleButton, handleButton2 }) {
         <>
           <S.HeaderBoard>
             <S.IconsWrapper>
-              <S.IconBox onClick={handleButton}>
+              <S.IconBox onClick={() => history.push("/")}>
                 <HomeSVG />
               </S.IconBox>
               <h1>{content}</h1>
-              <S.IconBox onClick={handleButton2}>
+              <S.IconBox onClick={handleButton}>
                 <LogoutSVG />
               </S.IconBox>
+            </S.IconsWrapper>
+          </S.HeaderBoard>
+          <S.HeaderWhiteSpace />
+        </>
+      );
+    case "achieveCheck":
+      return (
+        <>
+          <S.HeaderBoard>
+            <S.IconsWrapper>
+              <S.IconBox onClick={() => history.push("/")}>
+                <HomeSVG />
+              </S.IconBox>
+              <h1>{content}</h1>
+              <S.IconBox />
             </S.IconsWrapper>
           </S.HeaderBoard>
           <S.HeaderWhiteSpace />
