@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const InnerContainer = styled.div`
-  height: 6rem;
+  height: 5rem;
   width: 38rem;
   border: 0.2rem solid #F2EAA9;
   border-radius: 1.5rem;
