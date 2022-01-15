@@ -22,7 +22,7 @@ function Home() {
   useEffect(() => {
     // 별 정보 3초 보여주는 로직
     if (clickedIndex > 0) {
-      const timer = setTimeout(() => {
+      setTimeout(() => {
         setClickedIndex(0);
       }, [3000]);
     }
@@ -43,9 +43,6 @@ function Home() {
     const starInfo = document.createElement("p");
     starInfo.innerHTML = args.title;
     hotSpotDiv.appendChild(starInfo);
-    // starInfo.style.marginLeft =
-    //   -(starInfo.scrollWidth - starDiv.offsetWidth) / 2 + "px";
-    // starInfo.style.marginTop = -starInfo.scrollHeight - 12 + "px";
     starInfo.style.display = "none";
   };
 
@@ -71,25 +68,24 @@ function Home() {
           onLoad={() => setIsLoading(false)}
           showFullscreenCtrl={false}
           hotSpotDebug
-          onMouseup={(event) => {
-            setPosition(() => ({
-              hfov: panImage.current.getViewer().getConfig().hfov,
-              pitch: panImage.current.getViewer().getConfig().pitch,
-              yaw: panImage.current.getViewer().getConfig().yaw,
-            }));
-
-            setStarList((prev) => [
-              ...prev,
-              {
-                pitch: panImage.current
-                  .getViewer()
-                  .mouseEventToCoords(event)[0],
-                yaw: panImage.current.getViewer().mouseEventToCoords(event)[1],
-              },
-            ]);
-
-            setIsLoading(true);
-          }}
+          disabledKeyboardCtrl={false}
+          // onMousedown={(event) => {
+          //   setPosition(() => ({
+          //     hfov: panImage.current.getViewer().getConfig().hfov,
+          //     pitch: panImage.current.getViewer().getConfig().pitch,
+          //     yaw: panImage.current.getViewer().getConfig().yaw,
+          //   }));
+          //   setStarList((prev) => [
+          //     ...prev,
+          //     {
+          //       pitch: panImage.current
+          //         .getViewer()
+          //         .mouseEventToCoords(event)[0],
+          //       yaw: panImage.current.getViewer().mouseEventToCoords(event)[1],
+          //     },
+          //   ]);
+          //   setIsLoading(true);
+          // }}
         >
           {starList.map((star, index) => (
             <Pannellum.Hotspot
