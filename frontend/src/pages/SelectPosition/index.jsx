@@ -10,6 +10,7 @@ import { Pannellum } from "pannellum-react";
 import spaceImg from "../../assets/image/space1.jpg";
 import Loading from "../../components/Loading";
 import Planet from "../../components/Planet";
+import ConfirmModal from "./components/ConfirmModal";
 
 function SelectPosition() {
   const { item, target_number } = useParams();
@@ -28,7 +29,7 @@ function SelectPosition() {
   const [isPannelLoading, setIsPannelLoading] = useState(true);
   const [position, setPosition] = useState({ hfov: 100, pitch: 100, yaw: 100 });
   const [clickedIndex, setClickedIndex] = useState(0);
-  const [newStar, setNewStar] = useState(null);
+  const [newStar, setNewStar] = useState([]);
 
   const panImage = useRef(null);
 
@@ -42,8 +43,10 @@ function SelectPosition() {
   }, [clickedIndex]);
 
   useEffect(() => {
-    console.log(newStar);
-  }, [newStar]);
+    if (starList) {
+      setNewStar(() => starList);
+    }
+  }, [starList]);
 
   const CreatDoneHotspot = (hotSpotDiv, args) => {
     const starDiv = document.createElement("div");
@@ -63,6 +66,8 @@ function SelectPosition() {
     starInfo.style.display = "none";
   };
 
+  const [isConfirmModalOn, setIsConfirmModalOn] = useState(false);
+
   if (isLoading || isUserLoading) {
     return <Loading />;
   }
@@ -70,6 +75,13 @@ function SelectPosition() {
   return (
     <>
       <Header type="select" content={`${userInfo.nickname}의 행성`} />
+      <ConfirmModal
+        isOpen={isConfirmModalOn}
+        setIsOpen={setIsConfirmModalOn}
+        setNewStar={setNewStar}
+        newStar={newStar}
+        setIsPannelLoading={setIsPannelLoading}
+      />
       <S.Container clickedIndex={clickedIndex}>
         {isPannelLoading && <Loading />}
 
@@ -89,20 +101,28 @@ function SelectPosition() {
           showFullscreenCtrl={false}
           hotSpotDebug
           disabledKeyboardCtrl={false}
+          newStar={newStar}
+          starList={starList}
           onMousedown={(event) => {
             setPosition(() => ({
               hfov: panImage.current.getViewer().getConfig().hfov,
               pitch: panImage.current.getViewer().getConfig().pitch,
               yaw: panImage.current.getViewer().getConfig().yaw,
             }));
-            setNewStar(() => ({
-              pitch: panImage.current.getViewer().mouseEventToCoords(event)[0],
-              yaw: panImage.current.getViewer().mouseEventToCoords(event)[1],
-            }));
-            // setIsPannelLoading(true);
+            setNewStar((prev) => [
+              ...prev,
+              {
+                pitch: panImage.current
+                  .getViewer()
+                  .mouseEventToCoords(event)[0],
+                yaw: panImage.current.getViewer().mouseEventToCoords(event)[1],
+              },
+            ]);
+            setIsConfirmModalOn(() => true);
+            setIsPannelLoading(true);
           }}
         >
-          {starList.map((star, index) => (
+          {newStar.map((star, index) => (
             <Pannellum.Hotspot
               key={index}
               type="custom"
@@ -119,18 +139,6 @@ function SelectPosition() {
               tooltipArg={{ title: "미라클 모닝" }}
             />
           ))}
-          {/* {newStar !== null && (
-            <Pannellum.Hotspot
-              type="custom"
-              pitch={newStar.pitch}
-              yaw={newStar.yaw}
-              handleClick={(evt, index) => setClickedIndex(() => index)}
-              handleClickArg={Number(1)}
-              cssClass={"done"}
-              tooltip={CreatDoneHotspot}
-              tooltipArg={{ title: "미라클 모닝" }}
-            />
-          )} */}
         </Pannellum>
         <Planet />
       </S.Container>
