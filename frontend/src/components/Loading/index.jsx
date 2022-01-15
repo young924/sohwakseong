@@ -1,6 +1,6 @@
 import React from "react";
-import PageLayout from "../../../../components/PageLayout";
-import loadingImg from "../../../../assets/image/loading.png";
+import PageLayout from "../PageLayout";
+import loadingImg from "../../assets/image/loading.png";
 import * as S from "./style";
 
 function Loading() {
