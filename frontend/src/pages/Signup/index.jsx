@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { loginState } from "../../hooks/useUserInfo";
 
 function Signup() {
   const history = useHistory();
+  const setIsLogin = useSetRecoilState(loginState);
   const [userInputs, setUserInputs] = useState({
     nickname: "",
     password: "",
@@ -57,6 +60,7 @@ function Signup() {
             .then((res) => {
               const { token } = res.data;
               localStorage.setItem("token", token);
+              setIsLogin(true);
               history.push("/");
             })
             .catch((err) => {
