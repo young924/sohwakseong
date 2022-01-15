@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useMutation } from "react-query";
 import { useHistory, useParams } from "react-router-dom";
 import { starApi } from "../../../../api/star";
@@ -23,6 +23,13 @@ function ConfirmModal({
       onSuccess: () => history.push("/"),
     }
   );
+
+  const handleNoButton = useCallback(() => {
+    const prevStarList = newStar.pop();
+    setIsOpen(false);
+    setIsPannelLoading(true);
+    setNewStar(...prevStarList);
+  }, [newStar]);
   return (
     <Modal
       isOpen={isOpen}
@@ -33,15 +40,7 @@ function ConfirmModal({
         <h2>이 곳에 별을 만드시겠습니까?</h2>
         <S.ButtonWrapper>
           <S.Button onClick={createStar}>네</S.Button>
-          <S.Button
-            onClick={() => {
-              setIsOpen(false);
-              setNewStar((prev) => [...prev.po]);
-              setIsPannelLoading(true);
-            }}
-          >
-            아니요
-          </S.Button>
+          <S.Button onClick={handleNoButton}>아니요</S.Button>
         </S.ButtonWrapper>
       </S.Container>
     </Modal>

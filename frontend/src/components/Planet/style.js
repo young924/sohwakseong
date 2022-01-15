@@ -8,23 +8,8 @@ export const Container = styled.section`
   right: 0;
   max-width: 420px;
   margin: auto;
-
   > img {
-    ${({ clickedIndex }) => css`
-      &:nth-child(${clickedIndex}) {
-        filter: drop-shadow(0px 0px 2rem rgba(255, 255, 255, 1));
-      }
-    `}
-
-    ${({ clickedIndex }) =>
-      clickedIndex === 1 &&
-      css`
-        &:nth-child(${clickedIndex}) {
-          top: 0rem;
-
-          filter: drop-shadow(0px 0px 1rem rgba(255, 255, 255, 1));
-        }
-      `}
+    filter: drop-shadow(0px 0px 1.8rem rgba(255, 255, 255, 0.8));
   }
 `;
 
@@ -73,4 +58,13 @@ export const Planet = styled.img`
   right: 0;
   margin: auto; */
   position: absolute;
+`;
+
+export const Notice = styled.p`
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+  text-align: center;
+  color: black;
+  font-weight: 500;
 `;

@@ -1,6 +1,10 @@
 import styled, { css } from "styled-components";
 
 export const Container = styled.div`
+  div.pnlm-dragfix {
+    cursor: pointer;
+  }
+
   .done {
     > div.star {
       background-color: #e3e088 !important;
@@ -53,6 +57,16 @@ export const Container = styled.div`
         height: 3rem !important;
       }
     }
+    ${({ isOpen }) =>
+      isOpen &&
+      css`
+        &:last-child {
+          > div.star {
+            background-color: #db83ff !important;
+            z-index: 100000000000;
+          }
+        }
+      `}
   }
 
   .${({ clickedIndex }) => `ing${clickedIndex}`} {

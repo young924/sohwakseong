@@ -11,10 +11,11 @@ import spaceImg from "../../assets/image/space1.jpg";
 import Loading from "../../components/Loading";
 import Planet from "../../components/Planet";
 import ConfirmModal from "./components/ConfirmModal";
+import useMobileCheck from "../../hooks/useMobileCheck";
 
 function SelectPosition() {
-  const { item, target_number } = useParams();
   const token = useToken();
+  const isMobile = useMobileCheck();
   const { data: userInfo, isLoading: isUserLoading } = useQuery(
     ["userInfo", token],
     () => userApi.getUserInfoByToken(token),
@@ -48,6 +49,11 @@ function SelectPosition() {
     }
   }, [starList]);
 
+  useEffect(() => {
+    if (isMobile) return;
+    window.addEventListener("dblclick", handleNewStar);
+  }, []);
+
   const CreatDoneHotspot = (hotSpotDiv, args) => {
     const starDiv = document.createElement("div");
     starDiv.classList.add("star");
@@ -68,6 +74,29 @@ function SelectPosition() {
 
   const [isConfirmModalOn, setIsConfirmModalOn] = useState(false);
 
+  const onMousedown = (event) => {
+    if (isMobile) {
+      handleNewStar(event);
+    }
+  };
+
+  const handleNewStar = (event) => {
+    setPosition(() => ({
+      hfov: panImage.current.getViewer().getConfig().hfov,
+      pitch: panImage.current.getViewer().getConfig().pitch,
+      yaw: panImage.current.getViewer().getConfig().yaw,
+    }));
+    setNewStar((prev) => [
+      ...prev,
+      {
+        pitch: panImage.current.getViewer().mouseEventToCoords(event)[0],
+        yaw: panImage.current.getViewer().mouseEventToCoords(event)[1],
+      },
+    ]);
+    setIsConfirmModalOn(true);
+    setIsPannelLoading(true);
+  };
+
   if (isLoading || isUserLoading) {
     return <Loading />;
   }
@@ -82,7 +111,7 @@ function SelectPosition() {
         newStar={newStar}
         setIsPannelLoading={setIsPannelLoading}
       />
-      <S.Container clickedIndex={clickedIndex}>
+      <S.Container clickedIndex={clickedIndex} isOpen={isConfirmModalOn}>
         {isPannelLoading && <Loading />}
 
         <Pannellum
@@ -102,25 +131,7 @@ function SelectPosition() {
           hotSpotDebug
           disabledKeyboardCtrl={false}
           newStar={newStar}
-          starList={starList}
-          onMousedown={(event) => {
-            setPosition(() => ({
-              hfov: panImage.current.getViewer().getConfig().hfov,
-              pitch: panImage.current.getViewer().getConfig().pitch,
-              yaw: panImage.current.getViewer().getConfig().yaw,
-            }));
-            setNewStar((prev) => [
-              ...prev,
-              {
-                pitch: panImage.current
-                  .getViewer()
-                  .mouseEventToCoords(event)[0],
-                yaw: panImage.current.getViewer().mouseEventToCoords(event)[1],
-              },
-            ]);
-            setIsConfirmModalOn(() => true);
-            setIsPannelLoading(true);
-          }}
+          onMousedown={onMousedown}
         >
           {newStar.map((star, index) => (
             <Pannellum.Hotspot
@@ -136,11 +147,11 @@ function SelectPosition() {
                   : `ing${String(index + 1)} ing`
               }
               tooltip={CreatDoneHotspot}
-              tooltipArg={{ title: "미라클 모닝" }}
+              tooltipArg={{ title: star?.item?.title || "" }}
             />
           ))}
         </Pannellum>
-        <Planet />
+        <Planet isMobile={isMobile} />
       </S.Container>
     </>
   );
