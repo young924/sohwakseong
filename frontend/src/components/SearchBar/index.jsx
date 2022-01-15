@@ -5,7 +5,7 @@ import { ReactComponent as SearchIcon } from "../../assets/icon/search.svg";
 
 function SearchBar({ placeholder, handleSearchButton, input, handleInput }) {
   return (
-    <>
+    <div className="search-bar">
       <S.Container>
         <S.InnerContainer>
           <SearchIcon onClick={handleSearchButton} />
@@ -16,7 +16,7 @@ function SearchBar({ placeholder, handleSearchButton, input, handleInput }) {
           />
         </S.InnerContainer>
       </S.Container>
-    </>
+    </div>
   );
 }
 
