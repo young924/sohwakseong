@@ -1,34 +1,34 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import useToken from "../../hooks/useToken";
 import Header from "../../components/Header";
+import { userApi } from "../../api/user";
+import { starApi } from "../../api/star";
+import { useQuery } from "react-query";
+import * as S from "./style";
+import useToken from "../../hooks/useToken";
 import { Pannellum } from "pannellum-react";
 import spaceImg from "../../assets/image/space1.jpg";
 import Loading from "../../components/Loading";
 import Planet from "../../components/Planet";
-import { useQuery } from "react-query";
-import { starApi } from "../../api/star";
-import * as S from "./style";
-import { userApi } from "../../api/user";
 
-function FriendPlanet() {
-  const { id } = useParams();
+function SelectPosition() {
+  const { item, target_number } = useParams();
   const token = useToken();
-  const { data: starList, isLoading } = useQuery(
-    ["starList", id, token],
-    () => starApi.getStarListByUserId(id, token),
-    { enabled: !!(id || token) }
+  const { data: userInfo, isLoading: isUserLoading } = useQuery(
+    ["userInfo", token],
+    () => userApi.getUserInfoByToken(token),
+    { enabled: !!token }
   );
-
-  const { data: nickname } = useQuery(
-    ["nickname", id, token],
-    () => userApi.getNicknameByUserId(id, token),
-    { enabled: !!(id || token) }
+  const { data: starList, isLoading } = useQuery(
+    ["starList", token],
+    () => starApi.getMyStarList(token),
+    { enabled: !!token }
   );
 
   const [isPannelLoading, setIsPannelLoading] = useState(true);
   const [position, setPosition] = useState({ hfov: 100, pitch: 100, yaw: 100 });
   const [clickedIndex, setClickedIndex] = useState(0);
+  const [newStar, setNewStar] = useState(null);
 
   const panImage = useRef(null);
 
@@ -40,6 +40,10 @@ function FriendPlanet() {
       }, [3000]);
     }
   }, [clickedIndex]);
+
+  useEffect(() => {
+    console.log(newStar);
+  }, [newStar]);
 
   const CreatDoneHotspot = (hotSpotDiv, args) => {
     const starDiv = document.createElement("div");
@@ -58,12 +62,14 @@ function FriendPlanet() {
     hotSpotDiv.appendChild(starInfo);
     starInfo.style.display = "none";
   };
-  if (isLoading) {
+
+  if (isLoading || isUserLoading) {
     return <Loading />;
   }
+
   return (
     <>
-      <Header type="friendPlanet" content={`${nickname}의 행성`} />
+      <Header type="select" content={`${userInfo.nickname}의 행성`} />
       <S.Container clickedIndex={clickedIndex}>
         {isPannelLoading && <Loading />}
 
@@ -83,6 +89,18 @@ function FriendPlanet() {
           showFullscreenCtrl={false}
           hotSpotDebug
           disabledKeyboardCtrl={false}
+          onMousedown={(event) => {
+            setPosition(() => ({
+              hfov: panImage.current.getViewer().getConfig().hfov,
+              pitch: panImage.current.getViewer().getConfig().pitch,
+              yaw: panImage.current.getViewer().getConfig().yaw,
+            }));
+            setNewStar(() => ({
+              pitch: panImage.current.getViewer().mouseEventToCoords(event)[0],
+              yaw: panImage.current.getViewer().mouseEventToCoords(event)[1],
+            }));
+            // setIsPannelLoading(true);
+          }}
         >
           {starList.map((star, index) => (
             <Pannellum.Hotspot
@@ -101,6 +119,18 @@ function FriendPlanet() {
               tooltipArg={{ title: "미라클 모닝" }}
             />
           ))}
+          {newStar !== null && (
+            <Pannellum.Hotspot
+              type="custom"
+              pitch={newStar.pitch}
+              yaw={newStar.yaw}
+              handleClick={(evt, index) => setClickedIndex(() => index)}
+              handleClickArg={Number(1)}
+              cssClass={"done"}
+              tooltip={CreatDoneHotspot}
+              tooltipArg={{ title: "미라클 모닝" }}
+            />
+          )}
         </Pannellum>
         <Planet />
       </S.Container>
@@ -108,4 +138,4 @@ function FriendPlanet() {
   );
 }
 
-export default FriendPlanet;
+export default SelectPosition;

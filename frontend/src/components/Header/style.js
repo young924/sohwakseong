@@ -93,6 +93,7 @@ export const HomeBox = styled.div`
   margin: auto;
   z-index: 10000;
   cursor: pointer;
+  z-index: 100;
 
   &:hover {
     background: rgba(255, 255, 255, 0.3);
@@ -112,7 +113,7 @@ export const FixedTitle = styled.h1`
   font-size: 2rem;
   text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.82);
   margin: 0.4rem 0 0 0;
-  z-index: 10000;
+  z-index: 10;
   color: #ffff;
 `;
 

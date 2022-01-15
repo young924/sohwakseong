@@ -71,23 +71,6 @@ function Home() {
           showFullscreenCtrl={false}
           hotSpotDebug
           disabledKeyboardCtrl={false}
-          // onMousedown={(event) => {
-          //   setPosition(() => ({
-          //     hfov: panImage.current.getViewer().getConfig().hfov,
-          //     pitch: panImage.current.getViewer().getConfig().pitch,
-          //     yaw: panImage.current.getViewer().getConfig().yaw,
-          //   }));
-          //   setStarList((prev) => [
-          //     ...prev,
-          //     {
-          //       pitch: panImage.current
-          //         .getViewer()
-          //         .mouseEventToCoords(event)[0],
-          //       yaw: panImage.current.getViewer().mouseEventToCoords(event)[1],
-          //     },
-          //   ]);
-          //   setIsLoading(true);
-          // }}
         >
           {starList.map((star, index) => (
             <Pannellum.Hotspot

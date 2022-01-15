@@ -75,6 +75,12 @@ function Header({ type = "home", content = "", handleButton, handleButton2 }) {
           <S.HeaderWhiteSpace />
         </>
       );
+    case "select":
+      return (
+        <>
+          <S.FixedTitle>{content}</S.FixedTitle>
+        </>
+      );
 
     default:
       return <></>;
