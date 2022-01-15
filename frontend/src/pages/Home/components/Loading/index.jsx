@@ -1,8 +1,17 @@
 import React from "react";
+import PageLayout from "../../../../components/PageLayout";
+import loadingImg from "../../../../assets/image/loading.png";
 import * as S from "./style";
 
 function Loading() {
-  return <S.Container>로딩중</S.Container>;
+  return (
+    <PageLayout>
+      <S.Container>
+        <img src={loadingImg} />
+        로딩 중...
+      </S.Container>
+    </PageLayout>
+  );
 }
 
 export default Loading;

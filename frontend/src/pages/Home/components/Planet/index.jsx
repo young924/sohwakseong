@@ -11,7 +11,6 @@ function Planet() {
   const history = useHistory();
   const handleClick = useCallback(
     (index) => {
-      console.log("클릭");
       if (index !== clickedIndex) {
         setClickedIndex(() => index);
         return;
@@ -32,6 +31,14 @@ function Planet() {
     },
     [clickedIndex]
   );
+
+  useEffect(() => {
+    if (clickedIndex > 0) {
+      setTimeout(() => {
+        setClickedIndex(0);
+      }, 5000);
+    }
+  }, [clickedIndex]);
 
   return (
     <S.Container clickedIndex={clickedIndex}>
