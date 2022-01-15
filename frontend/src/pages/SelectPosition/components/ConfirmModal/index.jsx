@@ -35,6 +35,7 @@ function ConfirmModal({
       isOpen={isOpen}
       setIsOpen={setIsOpen}
       styleInWhiteBox={{ padding: "0", marginTop: "300px" }}
+      backgroundClose={false}
     >
       <S.Container>
         <h2>이 곳에 별을 만드시겠습니까?</h2>

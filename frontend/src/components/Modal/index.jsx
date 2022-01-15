@@ -10,7 +10,7 @@ const Modal = ({
   closeButton = false,
   style = { padding: "4rem" },
   styleInWhiteBox = { padding: "2.4rem" },
-  backgroundClose = false,
+  backgroundClose = true,
 }) => {
   const stopPropagation = useCallback((e) => {
     e.stopPropagation();
