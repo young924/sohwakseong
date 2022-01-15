@@ -10,7 +10,6 @@
     "axios": "^0.24.0",
     "dayjs": "^1.10.7",
     "emoji-picker-react": "^3.5.0",
-    "axios": "^0.24.0",
     "pannellum-react": "^1.2.4",
     "react": "^17.0.2",
     "react-calendar": "^3.5.0",
