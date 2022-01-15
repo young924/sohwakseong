@@ -17,6 +17,15 @@ function Header({ type = "home", content = "", handleButton, handleButton2 }) {
           </S.SearchBox>
         </>
       );
+    case "friendPlanet":
+      return (
+        <>
+          <S.HomeBox onClick={() => history.push("/")}>
+            <HomeSVG />
+          </S.HomeBox>
+          <S.FixedTitle>{content}</S.FixedTitle>
+        </>
+      );
     case "mypage":
       return (
         <>

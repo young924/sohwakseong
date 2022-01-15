@@ -1,13 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Pannellum } from "pannellum-react";
+<<<<<<< HEAD
 import spaceImg from "../../assets/image/space1.jpg";
 import Loading from "./components/Loading";
+=======
+import spaceImg from "../../assets/image/space.jpg";
+import Loading from "../../components/Loading";
+>>>>>>> d250442fe8797525aa6e1a4c1d40780e7f02bc0c
 import Planet from "./components/Planet";
 import * as S from "./style";
 import Header from "../../components/Header";
 import SearchModal from "./components/SearchModal";
+import { useHistory } from "react-router-dom";
 
 function Home() {
+  const history = useHistory();
   const [isSearchModalOn, setIsSearchModalOn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [position, setPosition] = useState({ hfov: 100, pitch: 100, yaw: 100 });
@@ -48,7 +55,7 @@ function Home() {
 
   return (
     <>
-      <Header type="home" handleButton={() => setIsSearchModalOn(true)} />
+      <Header type="home" handleButton={() => history.push("/friendsearch")} />
       <SearchModal isOpen={isSearchModalOn} setIsOpen={setIsSearchModalOn} />
       <S.Container clickedIndex={clickedIndex}>
         {isLoading && <Loading />}
@@ -89,6 +96,7 @@ function Home() {
         >
           {starList.map((star, index) => (
             <Pannellum.Hotspot
+              key={star.id}
               type="custom"
               pitch={star.pitch}
               yaw={star.yaw}

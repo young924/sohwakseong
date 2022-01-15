@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import AchieveCheck from "./pages/AchieveCheck";
 import FriendPlanet from "./pages/FriendPlanet";
+import FriendSearch from "./pages/FriendSearch";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Market from "./pages/Market";
@@ -19,6 +20,7 @@ function Router() {
         <Route path="/market" component={Market} />
         <Route path="/achievecheck" component={AchieveCheck} />
         <Route path="/friendplanet/:id" component={FriendPlanet} />
+        <Route path="/friendsearch" component={FriendSearch} />
       </Switch>
     </BrowserRouter>
   );

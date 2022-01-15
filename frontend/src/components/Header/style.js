@@ -78,3 +78,42 @@ export const SearchBox = styled.div`
     height: 2.8rem;
   }
 `;
+
+export const HomeBox = styled.div`
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 1.2rem;
+  left: 0;
+  right: 346px;
+  margin: auto;
+  z-index: 10000;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  > svg {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+`;
+
+export const FixedTitle = styled.h1`
+  position: fixed;
+  top: 1.2rem;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  font-size: 2rem;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.82);
+  margin: 0.4rem 0 0 0;
+  z-index: 10000;
+  color: #ffff;
+`;
+
+export const FixedContainer = styled.div``;
