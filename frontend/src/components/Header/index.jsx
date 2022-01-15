@@ -19,12 +19,12 @@ function Header({ type = "home", content = "", handleButton, handleButton2 }) {
       );
     case "friendPlanet":
       return (
-        <S.FixedTitle>
+        <>
           <S.HomeBox onClick={() => history.push("/")}>
             <HomeSVG />
           </S.HomeBox>
           <S.FixedTitle>{content}</S.FixedTitle>
-        </S.FixedTitle>
+        </>
       );
     case "mypage":
       return (

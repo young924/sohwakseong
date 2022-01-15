@@ -106,11 +106,12 @@ export const HomeBox = styled.div`
 export const FixedTitle = styled.h1`
   position: fixed;
   top: 1.2rem;
-
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
   font-size: 2rem;
   text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.82);
   margin: 0.4rem 0 0 0;
-  width: fit-content;
   z-index: 10000;
   color: #ffff;
 `;
