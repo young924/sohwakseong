@@ -41,7 +41,9 @@ function Login() {
           localStorage.setItem("token", token);
           history.push("/");
         })
-        .catch((err) => err.response);
+        .catch((err) => {
+          console.log(err.response);
+        });
     }
   }
 

@@ -88,7 +88,7 @@ class StarAPIView(APIView):
             for achv in daily_achvs:
                 star_data = {
                     'id': achv.star.id,
-                    'emoticon': star.item.emoticon,
+                    'emoticon': achv.star.item.emoticon,
                     'title': achv.star.item.title,
                     'is_achieved': True
                 }
