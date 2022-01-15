@@ -6,8 +6,10 @@ import Planet from "./components/Planet";
 import * as S from "./style";
 import Header from "../../components/Header";
 import SearchModal from "./components/SearchModal";
+import { useHistory } from "react-router-dom";
 
 function Home() {
+  const history = useHistory();
   const [isSearchModalOn, setIsSearchModalOn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [position, setPosition] = useState({ hfov: 100, pitch: 100, yaw: 100 });
@@ -48,7 +50,7 @@ function Home() {
 
   return (
     <>
-      <Header type="home" handleButton={() => setIsSearchModalOn(true)} />
+      <Header type="home" handleButton={() => history.push("/friendsearch")} />
       <SearchModal isOpen={isSearchModalOn} setIsOpen={setIsSearchModalOn} />
       <S.Container clickedIndex={clickedIndex}>
         {isLoading && <Loading />}
