@@ -19,6 +19,7 @@ function Market() {
         handleButton={() => setIsMakeStarModalOn(true)}
       />
       <SearchBar
+        placeholder={'별 검색하기'}
       />
     </PageLayout>
   );
