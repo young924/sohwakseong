@@ -4,9 +4,10 @@ import Header from "../../components/Header";
 import * as S from "./style";
 import MakeStarModal from "./components/MakeStarModal";
 import SearchBar from "../../components/SearchBar"
+import MarketItem from "./components/MarketItem";
 
 function Market() {
-  const [isMakeStarModalOn, setIsMakeStarModalOn] = useState(false);
+  const [isMakeStarModalOn, setIsMakeStarModalOn] = useState(true);
   return (
     <PageLayout>
       <MakeStarModal
@@ -21,6 +22,7 @@ function Market() {
       <SearchBar
         placeholder={'별 검색하기'}
       />
+      <MarketItem />
     </PageLayout>
   );
 }

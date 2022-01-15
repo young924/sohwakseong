@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import * as S from "./style"
 import { ReactComponent as SearchIcon } from '../../assets/icon/search.svg'

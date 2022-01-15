@@ -15,6 +15,17 @@ export const InnerContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 1.2rem;
+
+  > svg {
+    &:hover {
+      circle {
+        stroke: #878564fc
+      }
+      line {
+        stroke: #878564fc
+      }
+    }
+  }
 `;
 
 export const Input = styled.input`
