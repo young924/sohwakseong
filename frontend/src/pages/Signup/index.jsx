@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import PageLayout from "../../components/PageLayout";
 
 function Signup() {
   const history = useHistory();
@@ -70,36 +71,38 @@ function Signup() {
   };
 
   return (
-    <div className="signup-container">
-      <div>회원가입</div>
-      <div className="label">닉네임</div>
-      <input
-        id="nickname"
-        type="text"
-        placeholder="닉네임을 입력해 주세요."
-        value={userInputs.nickname}
-        onChange={onChangeInputs}
-      />
-      <div className="label">비밀번호</div>
-      <input
-        id="password"
-        type="password"
-        placeholder="비밀번호 (숫자,영문 조합 최소 8자)"
-        value={userInputs.password}
-        onChange={onChangeInputs}
-      />
-      <input
-        id="checkPassword"
-        type="password"
-        placeholder="비밀번호 확인"
-        value={userInputs.checkPassword}
-        onChange={onChangeInputs}
-      />
+    <PageLayout>
+      <div className="signup-container">
+        <div>회원가입</div>
+        <div className="label">닉네임</div>
+        <input
+          id="nickname"
+          type="text"
+          placeholder="닉네임을 입력해 주세요."
+          value={userInputs.nickname}
+          onChange={onChangeInputs}
+        />
+        <div className="label">비밀번호</div>
+        <input
+          id="password"
+          type="password"
+          placeholder="비밀번호 (숫자,영문 조합 최소 8자)"
+          value={userInputs.password}
+          onChange={onChangeInputs}
+        />
+        <input
+          id="checkPassword"
+          type="password"
+          placeholder="비밀번호 확인"
+          value={userInputs.checkPassword}
+          onChange={onChangeInputs}
+        />
 
-      <div className="signup-btn" onClick={onClickSignupButton}>
-        회원가입
+        <div className="signup-btn" onClick={onClickSignupButton}>
+          회원가입
+        </div>
       </div>
-    </div>
+    </PageLayout>
   );
 }
 
