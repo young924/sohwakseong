@@ -43,7 +43,7 @@ function Signup() {
   const onClickSignupButton = async () => {
     const { nickname, password, checkPassword } = userInputs;
     if (validateForm(nickname, password, checkPassword)) {
-      axios.post('/account-api/user/', {
+      axios.post('/account-api/users/', {
         nickname: nickname,
         password: password
       })
