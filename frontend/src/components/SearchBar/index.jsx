@@ -3,13 +3,13 @@ import React, { useMemo } from "react";
 import * as S from "./style";
 import { ReactComponent as SearchIcon } from "../../assets/icon/search.svg";
 
-function SearchBar({ handleEnter, placeholder, handleSearchButton, input, handleInput }) {
+function SearchBar({ handleSearch, placeholder, input, handleInput }) {
   return (
     <>
       <S.Container>
-        <form onSubmit={handleEnter}>
+        <form onSubmit={handleSearch}>
         <S.InnerContainer>
-          <SearchIcon onClick={handleSearchButton} />
+          <SearchIcon onClick={handleSearch} />
           <S.Input
             placeholder={placeholder}
             value={input}
