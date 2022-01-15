@@ -13,4 +13,15 @@ export const starApi = {
     });
     return starList;
   },
+  getMyStarList: async (token) => {
+    const { data: starList } = await axios.get("/star-api/stars", {
+      params: {
+        filter: "me",
+      },
+      headers: {
+        Authorization: token,
+      },
+    });
+    return starList;
+  },
 };

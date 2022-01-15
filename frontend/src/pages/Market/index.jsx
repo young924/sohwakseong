@@ -9,7 +9,7 @@ import { useInput } from "../../hooks/useInput";
 
 function Market() {
   const [isMakeStarModalOn, setIsMakeStarModalOn] = useState(true);
-  const [seachInput, handleSearchInput] = useInput();
+  const [searchInput, handleSearchInput] = useInput();
 
   return (
     <PageLayout>
@@ -24,7 +24,7 @@ function Market() {
       />
       <SearchBar
         placeholder={"별 검색하기"}
-        input={seachInput}
+        input={searchInput}
         handleInput={handleSearchInput}
         handleButton
       />

@@ -1,8 +1,8 @@
 import React from "react";
-import princeImg from "../../../../assets/image/prince.png";
-import foxImg from "../../../../assets/image/fox.png";
-import starImg from "../../../../assets/image/star.png";
-import planetImg from "../../../../assets/image/planet.png";
+import princeImg from "../../assets/image/prince.png";
+import foxImg from "../../assets/image/fox.png";
+import starImg from "../../assets/image/star.png";
+import planetImg from "../../assets/image/planet.png";
 import * as S from "./style";
 
 function Planet() {

@@ -11,12 +11,20 @@ export const Container = styled.div`
 `
 
 export const EmoticonContainer = styled.div`
-  background-color: rgba(255, 255, 255, 1);;
+  background-color: rgba(255, 255, 255, 1);
   width: 5rem;
   height: 5rem;
   border-radius: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 2rem;
 `
 
 export const Emoticon = styled.p`
-  font-size: 10px;
+  font-size: 3rem;
+  background-color: rgba(255, 255, 255, 1);
 `
+
+export const Div = styled.div`
+`;
