@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 function Signup() {
+  const history = useHistory();
   const [userInputs, setUserInputs] = useState({
     nickname: '',
     password: '',
@@ -46,8 +48,16 @@ function Signup() {
         password: password
       })
         .then((res) => {
-          // TODO login 처리
-          console.log(res);
+          axios.post('/account-api/token/obtain/', {
+            nickname: nickname,
+            password: password
+          })
+            .then((res) => {
+              const { token } = res.data;
+              localStorage.setItem("token", token);
+              history.push("/");
+            })
+            .catch((err) => err.response);
         })
         .catch((err) => err.response);
     }
