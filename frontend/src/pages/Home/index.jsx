@@ -1,12 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Pannellum } from "pannellum-react";
-<<<<<<< HEAD
 import spaceImg from "../../assets/image/space1.jpg";
 import Loading from "./components/Loading";
-=======
-import spaceImg from "../../assets/image/space.jpg";
-import Loading from "../../components/Loading";
->>>>>>> d250442fe8797525aa6e1a4c1d40780e7f02bc0c
 import Planet from "./components/Planet";
 import * as S from "./style";
 import Header from "../../components/Header";
