@@ -1,55 +1,60 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { loginState } from "../../hooks/useUserInfo";
 
 function Login() {
   const history = useHistory();
+  const setIsLogin = useSetRecoilState(loginState);
   const [userInputs, setUserInputs] = useState({
-    nickname: '',
-    password: '',
+    nickname: "",
+    password: "",
   });
 
   const onChangeInputs = (e) => {
     e.preventDefault();
     setUserInputs({
       ...userInputs,
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
     });
-  }
+  };
 
   const validateForm = (nickname, password) => {
     let isValid = false;
     if (!nickname) {
-      alert('닉네임을 입력해주세요!');
+      alert("닉네임을 입력해주세요!");
     } else if (!password) {
-      alert('패스워드를 입력해주세요!');
+      alert("패스워드를 입력해주세요!");
     } else {
       isValid = true;
     }
     return isValid;
-  }
+  };
 
   const onClickLoginButton = async () => {
     const { nickname, password } = userInputs;
     if (validateForm(nickname, password)) {
-      axios.post('/account-api/token/obtain/', {
-        nickname: nickname,
-        password: password
-      })
+      axios
+        .post("/account-api/token/obtain/", {
+          nickname: nickname,
+          password: password,
+        })
         .then((res) => {
           const { token } = res.data;
           localStorage.setItem("token", token);
+          setIsLogin(true);
           history.push("/");
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }
+  };
 
   const onClickSignupButton = () => {
     history.push("/signup");
-  }
+  };
 
   return (
     <div className="signup-container">
@@ -69,19 +74,14 @@ function Login() {
         onChange={onChangeInputs}
       />
 
-      <div
-        className="signup-btn"
-        onClick={onClickLoginButton}
-      >
+      <div className="signup-btn" onClick={onClickLoginButton}>
         로그인
       </div>
-      <div
-        className="signup-btn"
-        onClick={onClickSignupButton}
-      >
+      <div className="signup-btn" onClick={onClickSignupButton}>
         회원가입
       </div>
-    </div>);
+    </div>
+  );
 }
 
 export default Login;

@@ -18,6 +18,7 @@ function Home() {
     { yaw: 10, pitch: 120 },
   ]);
   const [clickedIndex, setClickedIndex] = useState(0);
+  const [planetClickedIndex, setPlanetClickedIndex] = useState(0);
 
   const panImage = useRef(null);
 
@@ -72,21 +73,7 @@ function Home() {
           hotSpotDebug
           disabledKeyboardCtrl={false}
           onMousedown={(event) => {
-            setPosition(() => ({
-              hfov: panImage.current.getViewer().getConfig().hfov,
-              pitch: panImage.current.getViewer().getConfig().pitch,
-              yaw: panImage.current.getViewer().getConfig().yaw,
-            }));
-            setStarList((prev) => [
-              ...prev,
-              {
-                pitch: panImage.current
-                  .getViewer()
-                  .mouseEventToCoords(event)[0],
-                yaw: panImage.current.getViewer().mouseEventToCoords(event)[1],
-              },
-            ]);
-            setIsLoading(true);
+            setPlanetClickedIndex(0);
           }}
         >
           {starList.map((star, index) => (
@@ -103,7 +90,10 @@ function Home() {
             />
           ))}
         </Pannellum>
-        <Planet />
+        <Planet
+          clickedIndex={planetClickedIndex}
+          setClickedIndex={setPlanetClickedIndex}
+        />
       </S.Container>
     </>
   );
