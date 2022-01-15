@@ -1,22 +1,43 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import useToken from "../../hooks/useToken";
 import Header from "../../components/Header";
 import { Pannellum } from "pannellum-react";
 import spaceImg from "../../assets/image/space.jpg";
 import Loading from "../../components/Loading";
 import Planet from "./components/Planet";
+import { useQuery } from "react-query";
+import { starApi } from "../../api/star";
 import * as S from "./style";
+import { userApi } from "../../api/user";
 
 function FriendPlanet() {
   const { id } = useParams();
-  const history = useHistory();
-  const [isSearchModalOn, setIsSearchModalOn] = useState(false);
+  const token = useToken();
+  const { data: starList } = useQuery(
+    ["starList", id, token],
+    () => starApi.getStarListByUserId(id, token),
+    { enabled: !!(id || token) }
+  );
+
+  const { data: nickname } = useQuery(
+    ["nickname", id, token],
+    () => userApi.getNicknameByUserId(id, token),
+    { enabled: !!(id || token) }
+  );
+
+  const { data: userInfo } = useQuery(
+    ["userInfo", token],
+    () => userApi.getUserInfoByToken(token),
+    { enabled: !!token }
+  );
+
+  useEffect(() => {
+    console.log(starList);
+  }, [starList]);
+
   const [isLoading, setIsLoading] = useState(true);
   const [position, setPosition] = useState({ hfov: 100, pitch: 100, yaw: 100 });
-  const [starList, setStarList] = useState([
-    { yaw: 10, pitch: 100 },
-    { yaw: 10, pitch: 120 },
-  ]);
   const [clickedIndex, setClickedIndex] = useState(0);
 
   const panImage = useRef(null);
@@ -49,7 +70,7 @@ function FriendPlanet() {
   };
   return (
     <>
-      <Header type="friendPlanet" content={`${id}의 행성`} />
+      <Header type="friendPlanet" content={`${nickname}의 행성`} />
       <S.Container clickedIndex={clickedIndex}>
         {isLoading && <Loading />}
 
@@ -72,14 +93,19 @@ function FriendPlanet() {
         >
           {starList.map((star, index) => (
             <Pannellum.Hotspot
+              key={index}
               type="custom"
               pitch={star.pitch}
               yaw={star.yaw}
               handleClick={(evt, index) => setClickedIndex(() => index)}
               handleClickArg={Number(index + 1)}
-              cssClass={`done${String(index + 1)} done`}
+              cssClass={
+                star.is_completed
+                  ? `done${String(index + 1)} done`
+                  : `ing${String(index + 1)} ing`
+              }
               tooltip={CreatDoneHotspot}
-              tooltipArg={{ title: "미라클 모닝 7am" }}
+              tooltipArg={{ title: star.item.title }}
             />
           ))}
         </Pannellum>
