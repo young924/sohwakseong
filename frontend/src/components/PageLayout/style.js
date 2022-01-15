@@ -21,7 +21,7 @@ export const Container = styled.main`
   background: #151515;
   overflow: hidden;
 
-  div.star {
+  > div.star {
     width: 2px;
     height: 2px;
     border-radius: 6px;
