@@ -89,6 +89,7 @@ function Home() {
         >
           {starList.map((star, index) => (
             <Pannellum.Hotspot
+              key={star.id}
               type="custom"
               pitch={star.pitch}
               yaw={star.yaw}
