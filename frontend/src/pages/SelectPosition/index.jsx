@@ -119,7 +119,7 @@ function SelectPosition() {
               tooltipArg={{ title: "미라클 모닝" }}
             />
           ))}
-          {newStar !== null && (
+          {/* {newStar !== null && (
             <Pannellum.Hotspot
               type="custom"
               pitch={newStar.pitch}
@@ -130,7 +130,7 @@ function SelectPosition() {
               tooltip={CreatDoneHotspot}
               tooltipArg={{ title: "미라클 모닝" }}
             />
-          )}
+          )} */}
         </Pannellum>
         <Planet />
       </S.Container>
