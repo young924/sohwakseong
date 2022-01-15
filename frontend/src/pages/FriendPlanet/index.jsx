@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import useToken from "../../hooks/useToken";
 import Header from "../../components/Header";
 import { Pannellum } from "pannellum-react";
-import spaceImg from "../../assets/image/space.jpg";
+import spaceImg from "../../assets/image/space1.jpg";
 import Loading from "../../components/Loading";
 import Planet from "./components/Planet";
 import { useQuery } from "react-query";
@@ -14,7 +14,7 @@ import { userApi } from "../../api/user";
 function FriendPlanet() {
   const { id } = useParams();
   const token = useToken();
-  const { data: starList } = useQuery(
+  const { data: starList, isLoading } = useQuery(
     ["starList", id, token],
     () => starApi.getStarListByUserId(id, token),
     { enabled: !!(id || token) }
@@ -32,11 +32,7 @@ function FriendPlanet() {
     { enabled: !!token }
   );
 
-  useEffect(() => {
-    console.log(starList);
-  }, [starList]);
-
-  const [isLoading, setIsLoading] = useState(true);
+  const [isPannelLoading, setIsPannelLoading] = useState(true);
   const [position, setPosition] = useState({ hfov: 100, pitch: 100, yaw: 100 });
   const [clickedIndex, setClickedIndex] = useState(0);
 
@@ -68,11 +64,14 @@ function FriendPlanet() {
     hotSpotDiv.appendChild(starInfo);
     starInfo.style.display = "none";
   };
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <>
       <Header type="friendPlanet" content={`${nickname}의 행성`} />
       <S.Container clickedIndex={clickedIndex}>
-        {isLoading && <Loading />}
+        {isPannelLoading && <Loading />}
 
         <Pannellum
           ref={panImage}
@@ -86,12 +85,12 @@ function FriendPlanet() {
           minHfov={50}
           autoLoad
           showZoomCtrl={false}
-          onLoad={() => setIsLoading(false)}
+          onLoad={() => setIsPannelLoading(false)}
           showFullscreenCtrl={false}
           hotSpotDebug
           disabledKeyboardCtrl={false}
         >
-          {/* {starList.map((star, index) => (
+          {starList.map((star, index) => (
             <Pannellum.Hotspot
               key={index}
               type="custom"
@@ -105,9 +104,9 @@ function FriendPlanet() {
                   : `ing${String(index + 1)} ing`
               }
               tooltip={CreatDoneHotspot}
-              tooltipArg={{ title: star.item.title }}
+              tooltipArg={{ title: "미라클 모닝" }}
             />
-          ))} */}
+          ))}
         </Pannellum>
         <Planet />
       </S.Container>

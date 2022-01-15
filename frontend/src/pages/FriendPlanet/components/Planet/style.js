@@ -37,7 +37,7 @@ export const Prince = styled.img`
   left: 0rem;
   right: 15rem;
   position: absolute;
-  cursor: pointer;
+
   transition: all 0.2s linear;
 `;
 
@@ -50,7 +50,7 @@ export const Fox = styled.img`
   right: 0;
   left: 15rem;
   position: absolute;
-  cursor: pointer;
+
   transition: all 0.2s linear;
 `;
 
@@ -63,7 +63,6 @@ export const Star = styled.img`
   left: 250px;
   position: fixed;
   transition: all 0.2s linear;
-  cursor: pointer;
 `;
 
 export const Planet = styled.img`
