@@ -91,7 +91,7 @@ function FriendPlanet() {
           hotSpotDebug
           disabledKeyboardCtrl={false}
         >
-          {starList.map((star, index) => (
+          {/* {starList.map((star, index) => (
             <Pannellum.Hotspot
               key={index}
               type="custom"
@@ -107,7 +107,7 @@ function FriendPlanet() {
               tooltip={CreatDoneHotspot}
               tooltipArg={{ title: star.item.title }}
             />
-          ))}
+          ))} */}
         </Pannellum>
         <Planet />
       </S.Container>
