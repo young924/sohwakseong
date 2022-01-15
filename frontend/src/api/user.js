@@ -15,9 +15,7 @@ export const userApi = {
     return nickname;
   },
   getUserInfoByToken: async (token) => {
-    const {
-      data: [userInfo],
-    } = await axios.get("/account-api/users/me", {
+    const { data: userInfo } = await axios.get("/account-api/users/me", {
       headers: {
         Authorization: token,
       },
