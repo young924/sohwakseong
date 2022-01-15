@@ -77,7 +77,9 @@ class StarAPIView(APIView):
                 is_achieved = bool(star.daily_achvs.filter(date=date))
                 star_data = {
                     'id': star.id,
+                    'emoticon': star.item.emoticon,
                     'title': star.item.title,
+                    'rest_count': star.target_number - star.daily_achvs.count(),
                     'is_achieved': is_achieved
                     }
                 uncompleted_stars_list.append(star_data)
@@ -86,6 +88,7 @@ class StarAPIView(APIView):
             for achv in daily_achvs:
                 star_data = {
                     'id': achv.star.id,
+                    'emoticon': star.item.emoticon,
                     'title': achv.star.item.title,
                     'is_achieved': True
                 }
