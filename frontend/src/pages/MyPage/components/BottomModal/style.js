@@ -53,6 +53,7 @@ export const Notice = styled.p`
   margin: 0;
   text-align: center;
   font-size: 1.4rem;
+  font-weight: 900;
   color: #ffd57c;
   opacity: 1;
   transition: all 0.5s linear;

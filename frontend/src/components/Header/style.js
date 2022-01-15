@@ -30,7 +30,7 @@ export const IconsWrapper = styled.div`
   width: 100%;
   > h1 {
     font-size: 2rem;
-    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.82);
+    text-shadow: 0px 0px 10px #F4F0CE;
     margin: 0.4rem 0 0 0;
   }
 `;

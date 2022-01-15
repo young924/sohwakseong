@@ -5,6 +5,10 @@ const GlobalStyleWrapper = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  p, h1 {
+    margin: 0;
+  }
+
   html {
     padding: 0;
     margin: 0;
