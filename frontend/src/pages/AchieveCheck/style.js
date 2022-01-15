@@ -29,3 +29,79 @@ export const CalendarWrapper = styled.section`
     }
   }
 `;
+
+export const Background = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  max-width: 420px;
+  background-color: #E6E7E8;
+  opacity: 0.6;
+  height: 45vh;
+`;
+
+export const StarsContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  max-width: 420px;
+  height: 45vh;
+  color: black;
+
+  > .stars {
+    width: 100%;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: scroll;
+    border-top: 0.2rem solid white;
+    
+    > .star {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0px 2rem;
+      width: 100%;
+      height: 8rem;
+      border-bottom: 0.2rem solid white;
+      border-radius: 0;
+      background-color: transparent;
+
+      > .star-content {
+        display: flex;
+        align-items: center;
+        font-size: 2rem;
+
+        .star-emoticon {
+          width: 4rem;
+          height: 4rem;
+          background-color: white;
+          padding: 1rem;
+          line-height: 2rem;
+          border-radius: 2rem;
+        }
+        .star-title {
+          padding-left: 2rem;
+          font-weight: 600;
+        }
+        .star-count {
+          color: white;
+          font-size: 1.5rem;
+          padding-left: 1rem;
+        }
+      }
+
+      > .icon {
+        width: 3rem;
+      }
+    }
+  }
+
+`;
