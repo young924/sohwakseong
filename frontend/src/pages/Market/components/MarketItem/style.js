@@ -2,12 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background-color: rgba(255, 255, 255, 0.8);;
-  width: 35rem;
+  width: 34rem;
   height: 8rem;
   border-radius: 1.2rem;
   display: flex;
   align-items: center;
   padding-left: 1.5rem;
+  margin: 0.5rem;
 `
 
 export const EmoticonContainer = styled.div`
