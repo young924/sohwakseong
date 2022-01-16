@@ -66,7 +66,7 @@ function ConfirmModal({
       <S.Container>
         <h2>이 곳에 별을 만드시겠습니까?</h2>
         <S.ButtonWrapper>
-          <S.Button onClick={() => createStar(lastStar.yaw, 200)}>네</S.Button>
+          <S.Button onClick={() => createStar(lastStar.yaw, 150)}>네</S.Button>
           <S.Button onClick={handleNoButton}>아니요</S.Button>
         </S.ButtonWrapper>
       </S.Container>
