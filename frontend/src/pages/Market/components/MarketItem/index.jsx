@@ -12,10 +12,6 @@ function MarketItem({
   setItemNameForModal,
   setEmoticonForModal,
 }) {
-  const Margin = useMemo(() => ({
-    margin: "0.5rem",
-    marginRight: "10rem",
-  }));
 
   const onClickCart = () => {
     setItemIdForModal(() => itemId);
@@ -33,8 +29,8 @@ function MarketItem({
           </S.EmoticonContainer>
 
           <S.StarInfoContainer>
-            <S.StarName style={Margin}>{starName}</S.StarName>
-            <S.StarAddedCount style={Margin}>담은 사람: {userCount}명</S.StarAddedCount>
+            <S.StarName>{starName}</S.StarName>
+            <S.StarAddedCount>담은 사람: {userCount}명</S.StarAddedCount>
           </S.StarInfoContainer>
         </S.AddDivider>
 

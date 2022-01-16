@@ -6,6 +6,7 @@ import * as S from "./style";
 import { useSetRecoilState } from "recoil";
 import { loginState } from "../../hooks/useUserInfo";
 import { ReactComponent as GoBack } from "../../assets/icon/go-back.svg";
+import { ReactComponent as RedCircle } from "../../assets/image/redCircle.png"
 
 function Signup() {
   const history = useHistory();

@@ -9,6 +9,7 @@ export const Container = styled.section`
   gap: 1.6rem;
   > h2 {
     margin-top: 0;
+    font-size: 2.2rem;
   }
   > svg {
     cursor: pointer;
@@ -21,19 +22,22 @@ export const Container = styled.section`
 `;
 
 export const InputWrapper = styled.div`
-  width: 100%;
+  width: 25rem;
   > p {
     margin: 0 0 0.6rem 0;
     text-align: left;
-    font-weight: 500;
+    font-weight: 700;
+    padding-left: 0.2rem;
   }
 `;
 
 export const Input = styled.input`
   width: 100%;
-  padding: 1.6rem;
-  border: none;
-  border-radius: 1.2rem;
+  padding: 1.6rem 0 1.6rem 1rem;
+  border: 0.1rem solid #0A0B16;
+  border-radius: 0.8rem;
+  background-color: #E6E7E8;
+  font-size: 1.4rem;
 
   &::focus-visible {
     border: none;
@@ -42,10 +46,11 @@ export const Input = styled.input`
 
 export const EmojiInput = styled.div`
   width: 100%;
-  padding: 1.6rem;
-  border: none;
-  border-radius: 1.2rem;
-  background-color: #ffff;
+  padding: 1.4rem 0 1.4rem 1rem;
+  border: 0.1rem solid #0A0B16;
+  border-radius: 0.8rem;
+  background-color: #E6E7E8;
   text-align: left;
   margin-bottom: 0.4rem;
+  font-size: 1.4rem;
 `;
