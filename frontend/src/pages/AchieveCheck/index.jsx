@@ -36,7 +36,7 @@ function AchieveCheck() {
         setStars(res.data);
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
       });
   }
 
@@ -62,7 +62,7 @@ function AchieveCheck() {
         getStarsOnSelectedDate(selectedDate);
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
       });
   }
 
