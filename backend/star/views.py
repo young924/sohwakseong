@@ -103,6 +103,20 @@ class StarAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+class StarDeleteAPIView(APIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    def delete(self, request, star_id):
+        star = get_object_or_404(Star, id=star_id)
+        if not (star.user == request.user):
+            msg = '삭제하려는 star가 해당 user의 star가 아닙니다.'
+            return Response({'msg': msg}, status=status.HTTP_400_BAD_REQUEST)
+        star.delete()
+        msg = f'star가 성공적으로 삭제되었습니다.'
+        return Response(msg, status=status.HTTP_204_NO_CONTENT)
+
+
 class FriendStarAPIView(APIView):
     def get(self, request, user_id):
         user = get_object_or_404(get_user_model(), id=user_id)
