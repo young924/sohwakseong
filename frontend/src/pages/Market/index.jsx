@@ -23,9 +23,13 @@ function Market() {
   );
   
   const [isMakeStarModalOn, setIsMakeStarModalOn] = useState(false);
-  const [isCartStarModalOn, setIsCartStarModalOn] = useState(true);
+  const [isCartStarModalOn, setIsCartStarModalOn] = useState(false);
   const [searchInput, handleSearchInput] = useInput();
   const [starItems, setStarItems] = useState([]);
+
+  const [itemIdForMadal, setItemIdForModal] = useState(0);
+  const [emoticonForMadal, setEmoticonForModal] = useState('⭐️');
+  const [itemNameForMadal, setItemNameForModal] = useState('별 이름');
 
   useEffect(() => {
     if (starItemData) {
@@ -64,6 +68,9 @@ function Market() {
       starName={item.title}
       userCount={item.user_count}
       setIsCartStarModalOn={setIsCartStarModalOn}
+      setItemIdForModal={setItemIdForModal}
+      setEmoticonForModal={setEmoticonForModal}
+      setItemNameForModal={setItemNameForModal}
       />));
   })();
 
@@ -74,6 +81,9 @@ function Market() {
         setIsOpen={setIsMakeStarModalOn}
       />
       <CartStarModal
+        itemId={itemIdForMadal}
+        itemName={itemNameForMadal}
+        emoticon={emoticonForMadal}
         isOpen={isCartStarModalOn}
         setIsOpen={setIsCartStarModalOn}
       />
