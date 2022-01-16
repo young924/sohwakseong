@@ -92,6 +92,7 @@ function SelectPosition() {
         setNewStar={setNewStar}
         newStar={newStar}
         setIsPannelLoading={setIsPannelLoading}
+        position={position}
       />
       <StarContainer clickedIndex={clickedIndex} isOpen={isConfirmModalOn}>
         {isPannelLoading && <Loading />}

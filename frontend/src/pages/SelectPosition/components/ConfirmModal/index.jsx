@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useHistory, useParams } from "react-router-dom";
 import { starApi } from "../../../../api/star";
@@ -12,31 +12,50 @@ function ConfirmModal({
   setNewStar,
   newStar,
   setIsPannelLoading,
+  position,
 }) {
   const { item, target_number } = useParams();
   const history = useHistory();
-  const { yaw, pitch } = newStar;
+  const [lastStar, setLastStar] = useState({ pitch: "", yaw: "" });
   const token = useToken();
   const { mutateAsync: createStar } = useMutation(
-    () =>
-      starApi.createMyStar(
+    async (yaw, pitch) =>
+      await starApi.createMyStar(
         Number(item),
         Number(target_number),
         yaw,
-        pitch,
+        200,
         token
       ),
     {
-      onSuccess: () => history.push("/"),
+      onSuccess: () =>
+        history.push({
+          pathname: "/",
+          state: {
+            pitch: lastStar.pitch,
+            yaw: lastStar.yaw,
+          },
+        }),
     }
   );
 
+  useEffect(() => {
+    if (newStar) {
+      setLastStar(() => newStar[newStar.length - 1]);
+    }
+  }, [newStar]);
+
+  useEffect(() => {
+    console.log(lastStar);
+  }, [lastStar]);
+
   const handleNoButton = useCallback(() => {
-    const prevStarList = newStar.pop();
+    newStar.pop();
     setIsOpen(false);
     setIsPannelLoading(true);
-    setNewStar(...prevStarList);
+    setNewStar(() => [...newStar]);
   }, [newStar]);
+
   return (
     <Modal
       isOpen={isOpen}
@@ -47,7 +66,9 @@ function ConfirmModal({
       <S.Container>
         <h2>이 곳에 별을 만드시겠습니까?</h2>
         <S.ButtonWrapper>
-          <S.Button onClick={createStar}>네</S.Button>
+          <S.Button onClick={() => createStar(lastStar.yaw, lastStar.pitch)}>
+            네
+          </S.Button>
           <S.Button onClick={handleNoButton}>아니요</S.Button>
         </S.ButtonWrapper>
       </S.Container>

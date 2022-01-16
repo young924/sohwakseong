@@ -6,7 +6,7 @@ import Planet from "./components/Planet";
 import * as S from "./style";
 import Header from "../../components/Header";
 import SearchModal from "./components/SearchModal";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import useToken from "../../hooks/useToken";
 import { starApi } from "../../api/star";
@@ -18,6 +18,13 @@ function Home() {
   const [isSearchModalOn, setIsSearchModalOn] = useState(false);
   const [isPannelLoading, setIsPannelLoading] = useState(true);
   const [position, setPosition] = useState({ hfov: 100, pitch: 100, yaw: 100 });
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state) {
+      setPosition({ pitch: location.state.pitch, yaw: location.state.yaw });
+    }
+  }, [location]);
 
   const { data: starList, isLoading } = useQuery(
     ["starList", token],
@@ -64,6 +71,7 @@ function Home() {
           onLoad={() => setIsPannelLoading(false)}
           showFullscreenCtrl={false}
           hotSpotDebug
+          position={position}
           disabledKeyboardCtrl={false}
           onMousedown={(event) => {
             setPlanetClickedIndex(0);
