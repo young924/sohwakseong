@@ -6,10 +6,12 @@ import Header from "../../components/Header";
 import { useHistory } from "react-router-dom";
 import BottomModal from "./components/BottomModal";
 import LogoutModal from "./components/LogoutModal";
+import DeleteModal from "./components/DeleteModal";
 
 function MyPage() {
   const history = useHistory();
   const [isLogoutModalOn, setIsLogoutModalOn] = useState(false);
+  const [isDeleteModalOn, setIsDeleteModalOn] = useState(false);
 
   return (
     <PageLayout>
@@ -21,8 +23,9 @@ function MyPage() {
       <LogoutModal isOpen={isLogoutModalOn} setIsOpen={setIsLogoutModalOn} />
       <S.Container>
         <S.Planet src={planetImg} alt="" />
-        <BottomModal></BottomModal>
+        <BottomModal handleButton={() => setIsDeleteModalOn(true)}/>
       </S.Container>
+      <DeleteModal isOpen={isDeleteModalOn} setIsOpen={setIsDeleteModalOn} />
     </PageLayout>
   );
 }

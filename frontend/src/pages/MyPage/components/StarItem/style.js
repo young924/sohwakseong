@@ -24,6 +24,8 @@ export const StarContainer = styled.div`
 export const GarbageDivider = styled.div `
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const EmoticonContainer = styled.div`
@@ -85,10 +87,21 @@ export const TotalCount = styled.p`
 `;
 
 export const IconBox = styled.div`
-    height: 50%;
-    width: 3rem;
+    /* position: relative; */
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    user-select: none;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+
     cursor: pointer;
+    &:hover {
+        background: #dfdfdf;
+    }
+    > svg {
+        width: 2.8rem;
+        height: 2.8rem;
+    }
 `;
