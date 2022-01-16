@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const LoginContainer = styled.div`
     width: 100%;
+    height: 100vh;
 
     > .star-img {
         width: 35rem;
@@ -24,14 +25,14 @@ export const LoginContainer = styled.div`
         border-top-left-radius: 3rem;
         border-top-right-radius: 3rem;
         width: 100%;
-        height: 61vh;
-        background-color: white;
-        opacity: 0.4;
-    }
+        height: 65vh;
+        bottom: 0;
+        background-color: grey;
+        opacity: 1;
+    
 
     > .login-inputs {
-        position: fixed;
-        top: 28rem;
+        height: 30rem;
         color: white;
         padding: 4rem;
         font-size: 2rem;
@@ -97,12 +98,13 @@ export const LoginContainer = styled.div`
 
         > .signup-btn {
             background-color: white;
-            opacity: 0.7;
+            opacity: 1;
         }
 
         > .signup-btn:hover {
             opacity: 1;
         }
+    }
     }
 
 `;
