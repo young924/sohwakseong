@@ -5,6 +5,7 @@ import PageLayout from "../../components/PageLayout";
 import "./style.css";
 import { useSetRecoilState } from "recoil";
 import { loginState } from "../../hooks/useUserInfo";
+import loginStarsPNG from "../../assets/image/login-stars.png";
 
 function Login() {
   const history = useHistory();
