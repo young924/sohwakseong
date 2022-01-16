@@ -58,7 +58,7 @@ function MakeStarModal({ isOpen, setIsOpen }) {
           <p>별 이름</p>
           <S.Input
             maxLength={12}
-            placeholder="12자 이하"
+            placeholder="공백 포함 12자 이하"
             value={starName}
             onChange={handleStarName}
           />

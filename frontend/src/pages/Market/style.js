@@ -1,3 +1,8 @@
 import styled from "styled-components";
 
-export const Container = styled.section``;
+export const StarItemsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
