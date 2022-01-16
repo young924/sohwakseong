@@ -1,31 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import Loading from "../../../../components/Loading";
 import useMount from "../../../../hooks/useMount";
-import useToken from "../../../../hooks/useToken";
 import StarItem from "../StarItem";
-
 import * as S from "./style";
-import {starApi} from '../../../../api/star'
 
 
-function BottomModal({ handleButton }) {
+function BottomModal({ handleButton, setDeleteStar, starList }) {
   const isMount = useMount();
   const [isComplete, setIsComplete] = useState(false);
   const [isNoticeOn, setIsNoticeOn] = useState(true);
-  const token = useToken()
 
-  const { data: starList, isLoading } = useQuery(['starList', token], () => starApi.getMyStarList(token), {enabled: !!token})
   useEffect(() => {
     setTimeout(() => {
       setIsNoticeOn(false);
     }, 5000);
-    
   }, []);
-
-  if(isLoading) {
-    return <Loading />
-  }
 
   return (
     <S.Container isMount={isMount}>
@@ -35,14 +23,19 @@ function BottomModal({ handleButton }) {
       </S.TabWrapper>
 
       {
-        isComplete === false
-        ? (starList.map((star, index) => <StarItem handleButton={ handleButton }  star={ star } index={ index }/>))
-        : null
+        !isComplete &&
+          starList.map((star, index)=>(
+          star.is_completed === false && (<StarItem handleButton={ handleButton }  star={ star } index={ index } setdeleteStar={ setDeleteStar } />)
+        ))
       }
 
-      {starList.map((star, index) => <StarItem handleButton={ handleButton }  star={ star } index={ index }/>)}
+      {
+        isComplete && 
+          starList.map((star, index)=>(
+            star.is_completed && (<StarItem handleButton={ handleButton }  star={ star } index={ index } setdeleteStar={ setDeleteStar } />)
+          ))
+      }
 
-      {/* {starList.map((star, index) => {<StarItem handleButton={ handleButton }  star={ star } index={ index }/>})} */}
       <S.Notice isNoticeOn={isNoticeOn}>
         *소확성을 꾸준히 달성하면 행성에 누군가가 놀러옵니다~!
       </S.Notice>

@@ -3,10 +3,10 @@ import * as S from './style';
 import { ReactComponent as GarbageSVG } from "../../../../assets/icon/garbage.svg";
 import { ReactComponent as DivisionLineSVG } from "../../../../assets/icon/divisionLine.svg";
 
-function StarItem({ handleButton, star }) {
+function StarItem({ handleButton, star, setDeleteStar }) {
     return (
         <S.Container>
-            <S.StarContainer>
+            <S.StarContainer isComplete={star.is_completed}>
                 <S.GarbageDivider>
                     <S.EmoticonContainer>
                         <S.Emoticon>{ star.item.emoticon }</S.Emoticon>
@@ -21,7 +21,9 @@ function StarItem({ handleButton, star }) {
                                 <S.AchievedCount>{ star.achv_count }</S.AchievedCount>
                             </S.AchievedCountContainer>
                             
-                            <DivisionLineSVG />
+                            <S.DivisionBox>
+                                <DivisionLineSVG />
+                            </S.DivisionBox>
                             
                             <S.TotalCountContainer>
                                 <p>총 횟수:</p>
@@ -31,7 +33,8 @@ function StarItem({ handleButton, star }) {
                     </S.StarInfoContainer>
                 </S.GarbageDivider>
 
-                <S.IconBox onClick={ handleButton }>
+                <S.IconBox onClick={ handleButton, setDeleteStar(star.item.title) }>
+                    {console.log(star.item.title)}
                     <GarbageSVG />
                 </S.IconBox>
 

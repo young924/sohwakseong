@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
     width: 100%;
@@ -19,7 +19,12 @@ export const StarContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+
+    ${({isComplete}) => isComplete && css`
+        background-color: rgba(244, 220, 167, 1);
+    `}
 `;
+
 
 export const GarbageDivider = styled.div `
     display: flex;
@@ -61,6 +66,9 @@ export const StarName = styled.p`
 export const StarCountContainer = styled.div`
     display: flex;
     flex-direction: row;
+    height: 1.8rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
 `;
 
 export const AchievedCountContainer = styled.div`
@@ -73,7 +81,11 @@ export const AchievedCount = styled.p`
     margin-left: 0.5rem;
 `;
 
-export const CountDivision = styled.p`
+export const DivisionBox = styled.div`
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
 `;
 
 export const TotalCountContainer = styled.div`
