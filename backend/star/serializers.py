@@ -30,16 +30,14 @@ class StarCreateSerializer(serializers.ModelSerializer):
 
 
 class StarListSerializer(serializers.ModelSerializer):
-    achv_rate = serializers.SerializerMethodField()
+    achv_count = serializers.SerializerMethodField()
     item = StarItemSerializer(read_only=True)
     
     class Meta:
         model = Star
-        fields = ['id', 'item', 'target_number', 'is_completed', 'yaw', 'pitch', 'achv_rate']
+        fields = ['id', 'item', 'target_number', 'is_completed', 'yaw', 'pitch', 'achv_count']
         read_only_fields = ('id', 'item', 'is_completed')
 
-    def get_achv_rate(self, obj):
-        current_achvs = obj.daily_achvs.count()
-        target_achvs = obj.target_number
-        print(current_achvs / target_achvs)
-        return int(current_achvs / target_achvs * 100)
+    def get_achv_count(self, obj):
+        achv_count = obj.daily_achvs.count()
+        return achv_count
