@@ -16,7 +16,11 @@ import useToken from "../../hooks/useToken";
 
 function Market() {
   const token = useToken();
-  const { data: starItemData, isLoading: isStarLoading } = useQuery(
+  const {
+    data: starItemData,
+    isLoading: isStarLoading,
+    refetch,
+  } = useQuery(
     ["starItemData", token],
     () => starItemApi.getStarItemList(token),
     { enabled: !!token }
@@ -84,6 +88,7 @@ function Market() {
       <MakeStarModal
         isOpen={isMakeStarModalOn}
         setIsOpen={setIsMakeStarModalOn}
+        refetch={refetch}
       />
       <CartStarModal
         itemId={itemIdForMadal}
