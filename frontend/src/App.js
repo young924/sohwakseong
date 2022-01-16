@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Router from "./Router";
@@ -21,10 +21,12 @@ function App() {
   return (
     <GlobalStyle>
       <RecoilRoot>
-        <QueryClientProvider client={queryClient}>
-          <Router />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
+        <Suspense fallback={<>로딩</>}>
+          <QueryClientProvider client={queryClient}>
+            <Router />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </Suspense>
       </RecoilRoot>
     </GlobalStyle>
   );

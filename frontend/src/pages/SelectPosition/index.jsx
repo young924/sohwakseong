@@ -10,10 +10,12 @@ import { Pannellum } from "pannellum-react";
 import spaceImg from "../../assets/image/space1.jpg";
 import Loading from "../../components/Loading";
 import Planet from "../../components/Planet";
+import ConfirmModal from "./components/ConfirmModal";
+import useMobileCheck from "../../hooks/useMobileCheck";
 
 function SelectPosition() {
-  const { item, target_number } = useParams();
   const token = useToken();
+  const isMobile = useMobileCheck();
   const { data: userInfo, isLoading: isUserLoading } = useQuery(
     ["userInfo", token],
     () => userApi.getUserInfoByToken(token),
@@ -28,7 +30,7 @@ function SelectPosition() {
   const [isPannelLoading, setIsPannelLoading] = useState(true);
   const [position, setPosition] = useState({ hfov: 100, pitch: 100, yaw: 100 });
   const [clickedIndex, setClickedIndex] = useState(0);
-  const [newStar, setNewStar] = useState(null);
+  const [newStar, setNewStar] = useState([]);
 
   const panImage = useRef(null);
 
@@ -42,8 +44,15 @@ function SelectPosition() {
   }, [clickedIndex]);
 
   useEffect(() => {
-    console.log(newStar);
-  }, [newStar]);
+    if (starList) {
+      setNewStar(() => starList);
+    }
+  }, [starList]);
+
+  useEffect(() => {
+    if (isMobile) return;
+    window.addEventListener("dblclick", handleNewStar);
+  }, []);
 
   const CreatDoneHotspot = (hotSpotDiv, args) => {
     const starDiv = document.createElement("div");
@@ -63,6 +72,31 @@ function SelectPosition() {
     starInfo.style.display = "none";
   };
 
+  const [isConfirmModalOn, setIsConfirmModalOn] = useState(false);
+
+  const onMousedown = (event) => {
+    if (isMobile) {
+      handleNewStar(event);
+    }
+  };
+
+  const handleNewStar = (event) => {
+    setPosition(() => ({
+      hfov: panImage.current.getViewer().getConfig().hfov,
+      pitch: panImage.current.getViewer().getConfig().pitch,
+      yaw: panImage.current.getViewer().getConfig().yaw,
+    }));
+    setNewStar((prev) => [
+      ...prev,
+      {
+        pitch: panImage.current.getViewer().mouseEventToCoords(event)[0],
+        yaw: panImage.current.getViewer().mouseEventToCoords(event)[1],
+      },
+    ]);
+    setIsConfirmModalOn(true);
+    setIsPannelLoading(true);
+  };
+
   if (isLoading || isUserLoading) {
     return <Loading />;
   }
@@ -70,7 +104,14 @@ function SelectPosition() {
   return (
     <>
       <Header type="select" content={`${userInfo.nickname}의 행성`} />
-      <S.Container clickedIndex={clickedIndex}>
+      <ConfirmModal
+        isOpen={isConfirmModalOn}
+        setIsOpen={setIsConfirmModalOn}
+        setNewStar={setNewStar}
+        newStar={newStar}
+        setIsPannelLoading={setIsPannelLoading}
+      />
+      <S.Container clickedIndex={clickedIndex} isOpen={isConfirmModalOn}>
         {isPannelLoading && <Loading />}
 
         <Pannellum
@@ -89,20 +130,10 @@ function SelectPosition() {
           showFullscreenCtrl={false}
           hotSpotDebug
           disabledKeyboardCtrl={false}
-          onMousedown={(event) => {
-            setPosition(() => ({
-              hfov: panImage.current.getViewer().getConfig().hfov,
-              pitch: panImage.current.getViewer().getConfig().pitch,
-              yaw: panImage.current.getViewer().getConfig().yaw,
-            }));
-            setNewStar(() => ({
-              pitch: panImage.current.getViewer().mouseEventToCoords(event)[0],
-              yaw: panImage.current.getViewer().mouseEventToCoords(event)[1],
-            }));
-            // setIsPannelLoading(true);
-          }}
+          newStar={newStar}
+          onMousedown={onMousedown}
         >
-          {starList.map((star, index) => (
+          {newStar.map((star, index) => (
             <Pannellum.Hotspot
               key={index}
               type="custom"
@@ -116,23 +147,11 @@ function SelectPosition() {
                   : `ing${String(index + 1)} ing`
               }
               tooltip={CreatDoneHotspot}
-              tooltipArg={{ title: "미라클 모닝" }}
+              tooltipArg={{ title: star?.item?.title || "" }}
             />
           ))}
-          {/* {newStar !== null && (
-            <Pannellum.Hotspot
-              type="custom"
-              pitch={newStar.pitch}
-              yaw={newStar.yaw}
-              handleClick={(evt, index) => setClickedIndex(() => index)}
-              handleClickArg={Number(1)}
-              cssClass={"done"}
-              tooltip={CreatDoneHotspot}
-              tooltipArg={{ title: "미라클 모닝" }}
-            />
-          )} */}
         </Pannellum>
-        <Planet />
+        <Planet isMobile={isMobile} />
       </S.Container>
     </>
   );

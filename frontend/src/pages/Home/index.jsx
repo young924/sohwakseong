@@ -18,6 +18,7 @@ function Home() {
     { yaw: 10, pitch: 120 },
   ]);
   const [clickedIndex, setClickedIndex] = useState(0);
+  const [planetClickedIndex, setPlanetClickedIndex] = useState(0);
 
   const panImage = useRef(null);
 
@@ -71,6 +72,9 @@ function Home() {
           showFullscreenCtrl={false}
           hotSpotDebug
           disabledKeyboardCtrl={false}
+          onMousedown={(event) => {
+            setPlanetClickedIndex(0);
+          }}
         >
           {starList.map((star, index) => (
             <Pannellum.Hotspot
@@ -86,7 +90,10 @@ function Home() {
             />
           ))}
         </Pannellum>
-        <Planet />
+        <Planet
+          clickedIndex={planetClickedIndex}
+          setClickedIndex={setPlanetClickedIndex}
+        />
       </S.Container>
     </>
   );
