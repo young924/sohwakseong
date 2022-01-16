@@ -14,7 +14,8 @@ function FriendSearch() {
   const [users, setUsers] = useState([{ id: 0, nickname: '' }]);
   const [searchInput, handleSearchInput] = useInput('');
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     if (searchInput === "") {
       alert("닉네임을 입력하세요!");
       return;
