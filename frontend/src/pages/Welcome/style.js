@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  width: 100%;
+  height: 100vh;
   > img {
     width: 100%;
     height: 100vh;
@@ -32,6 +34,7 @@ export const Button = styled.div`
   padding: 1.6rem;
   font-size: 2rem;
   text-align: center;
+  cursor: pointer;
 
   &:hover {
     background: rgba(255, 255, 255, 1);

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import useToken from "../../hooks/useToken";
 import Header from "../../components/Header";
 import { Pannellum } from "pannellum-react";
-import spaceImg from "../../assets/image/space1.jpg";
+import spaceImg from "../../assets/image/space5.png";
 import Loading from "../../components/Loading";
 import Planet from "../../components/Planet";
 import { useQuery } from "react-query";

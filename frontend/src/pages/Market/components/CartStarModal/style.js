@@ -12,11 +12,13 @@ export const Container = styled.section`
 
   > h2 {
     margin: 0;
+    font-size: 2.2rem;
+    padding: 1rem 0;
   }
 `;
 
 export const ImoticonContainer = styled.div`
-  width: 15rem;
+  width: 20rem;
   height: 13.6rem;
   background-color: #F5F5F5;
   border-radius: 1rem;
@@ -40,6 +42,7 @@ export const ImoticonHolder = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 1rem;
   `
 
 export const InputWrapper = styled.div`
@@ -48,15 +51,17 @@ export const InputWrapper = styled.div`
   > p {
     margin: 0 0 0.6rem 0;
     text-align: left;
-    font-weight: 500;
+    font-weight: 700;
+    padding-left: 0.2rem;
   }
 `;
 
 export const Input = styled.input`
   width: 100%;
   padding: 1.6rem;
-  border: none;
+  border: 0.1rem solid #0A0B16;
   border-radius: 1.2rem;
+  background-color: #E6E7E8;
 
   &::focus-visible {
     border: none;

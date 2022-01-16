@@ -31,7 +31,7 @@ export const LoginContainer = styled.div`
 
     > .login-inputs {
         position: fixed;
-        top: 31rem;
+        top: 28rem;
         color: white;
         padding: 4rem;
         font-size: 2rem;
