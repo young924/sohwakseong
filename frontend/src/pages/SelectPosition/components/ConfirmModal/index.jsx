@@ -19,12 +19,12 @@ function ConfirmModal({
   const [lastStar, setLastStar] = useState({ pitch: "", yaw: "" });
   const token = useToken();
   const { mutateAsync: createStar } = useMutation(
-    (yaw, pitch) =>
-      starApi.createMyStar(
+    async (yaw, pitch) =>
+      await starApi.createMyStar(
         Number(item),
         Number(target_number),
         yaw,
-        pitch,
+        200,
         token
       ),
     {
@@ -41,10 +41,13 @@ function ConfirmModal({
 
   useEffect(() => {
     if (newStar) {
-      setLastStar(() => newStar.pop);
-      console.log(newStar);
+      setLastStar(() => newStar[newStar.length - 1]);
     }
   }, [newStar]);
+
+  useEffect(() => {
+    console.log(lastStar);
+  }, [lastStar]);
 
   const handleNoButton = useCallback(() => {
     newStar.pop();
