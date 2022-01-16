@@ -24,7 +24,7 @@ function ConfirmModal({
         Number(item),
         Number(target_number),
         yaw,
-        200,
+        pitch,
         token
       ),
     {
@@ -49,12 +49,12 @@ function ConfirmModal({
     console.log(lastStar);
   }, [lastStar]);
 
-  const handleNoButton = useCallback(() => {
+  const handleNoButton = () => {
     newStar.pop();
     setIsOpen(false);
     setIsPannelLoading(true);
     setNewStar(() => [...newStar]);
-  }, [newStar]);
+  };
 
   return (
     <Modal
@@ -66,9 +66,7 @@ function ConfirmModal({
       <S.Container>
         <h2>이 곳에 별을 만드시겠습니까?</h2>
         <S.ButtonWrapper>
-          <S.Button onClick={() => createStar(lastStar.yaw, lastStar.pitch)}>
-            네
-          </S.Button>
+          <S.Button onClick={() => createStar(lastStar.yaw, 150)}>네</S.Button>
           <S.Button onClick={handleNoButton}>아니요</S.Button>
         </S.ButtonWrapper>
       </S.Container>
