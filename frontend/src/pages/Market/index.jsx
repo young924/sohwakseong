@@ -72,6 +72,7 @@ function Market() {
     return starItems.map((item) => (
       <MarketItem
         key={item.id}
+        itemId={item.id}
         emoticon={item.emoticon}
         starName={item.title}
         userCount={item.user_count}
