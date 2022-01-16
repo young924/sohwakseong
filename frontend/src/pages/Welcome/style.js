@@ -1,37 +1,39 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const Container = styled.div`
-    max-height: 100vh;
+  > img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+`;
 
-    > img {
-        width: 100%;
-    }
+export const ButtonWrapper = styled.div`
+  position: absolute;
+  bottom: 4rem;
+  margin: auto;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+`;
 
-    > .btn-container {
-        position: fixed;
-        bottom: 3rem;
-        width: 100%;
-        padding: 2rem;
-        font-size: 2rem;
-        font-weight: 500;
-        color: #4C4E5C;
+export const Button = styled.div`
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 2rem;
+  width: 80%;
+  padding: 1.6rem;
+  font-size: 2rem;
+  text-align: center;
 
-        > .btn {
-            background-color: white;
-            opacity: 0.7;
-            border-radius: 2rem;
-            width: 38rem;
-            padding: 1.5rem 15.5rem;
-            box-shadow: 0 8px 8px -8px black;
-        }
-
-        > .login-btn {
-            padding: 1.5rem 16.2rem;
-        }
-
-        > .signup-btn {
-            margin-top: 1.5rem;
-        }
-    }
-    
+  &:hover {
+    background: rgba(255, 255, 255, 1);
+  }
 `;

@@ -3,9 +3,12 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import PageLayout from "../../components/PageLayout";
 import "./style.css";
+import { useSetRecoilState } from "recoil";
+import { loginState } from "../../hooks/useUserInfo";
 
 function Signup() {
   const history = useHistory();
+  const setIsLogin = useSetRecoilState(loginState);
   const [userInputs, setUserInputs] = useState({
     nickname: "",
     password: "",
@@ -59,6 +62,7 @@ function Signup() {
             .then((res) => {
               const { token } = res.data;
               localStorage.setItem("token", token);
+              setIsLogin(true);
               history.push("/");
             })
             .catch((err) => {

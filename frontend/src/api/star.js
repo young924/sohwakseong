@@ -24,4 +24,21 @@ export const starApi = {
     });
     return starList;
   },
+  createMyStar: async (item, target_number, yaw, pitch, token) => {
+    const { data } = await axios.post(
+      "/star-api/stars/",
+      {
+        item: item,
+        target_number: target_number,
+        yaw: yaw,
+        pitch: pitch,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    return data;
+  },
 };

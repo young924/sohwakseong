@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useUserInfo } from "./hooks/useUserInfo";
 import AchieveCheck from "./pages/AchieveCheck";
 import FriendPlanet from "./pages/FriendPlanet";
 import FriendSearch from "./pages/FriendSearch";
@@ -12,31 +13,36 @@ import Signup from "./pages/Signup";
 import Welcome from "./pages/Welcome";
 
 function Router() {
-  if (localStorage.getItem('token')) {
+  const isLogin = useUserInfo();
+
+  if (!isLogin) {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/mypage" component={MyPage} />
-          <Route path="/market" component={Market} />
-          <Route path="/select/:item/:target_number" component={SelectPosition} />
-          <Route path="/achievecheck" component={AchieveCheck} />
-          <Route path="/friendplanet/:id" component={FriendPlanet} />
-          <Route path="/friendsearch" component={FriendSearch} />
-        </Switch>
-      </BrowserRouter>
-    );
-  } else {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Welcome} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route component={Welcome} />
         </Switch>
       </BrowserRouter>
     );
   }
+
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/mypage" component={MyPage} />
+        <Route path="/market" component={Market} />
+        <Route path="/select/:item/:target_number" component={SelectPosition} />
+        <Route path="/achievecheck" component={AchieveCheck} />
+        <Route path="/friendplanet/:id" component={FriendPlanet} />
+        <Route path="/friendsearch" component={FriendSearch} />
+        <Route component={Welcome} />
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 export default Router;

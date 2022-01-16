@@ -6,8 +6,7 @@ import planetImg from "../../../../assets/image/planet.png";
 import * as S from "./style";
 import { useHistory } from "react-router-dom";
 
-function Planet() {
-  const [clickedIndex, setClickedIndex] = useState(0);
+function Planet({ clickedIndex, setClickedIndex }) {
   const history = useHistory();
   const handleClick = useCallback(
     (index) => {
@@ -31,14 +30,6 @@ function Planet() {
     },
     [clickedIndex]
   );
-
-  useEffect(() => {
-    if (clickedIndex > 0) {
-      setTimeout(() => {
-        setClickedIndex(0);
-      }, 5000);
-    }
-  }, [clickedIndex]);
 
   return (
     <S.Container clickedIndex={clickedIndex}>
