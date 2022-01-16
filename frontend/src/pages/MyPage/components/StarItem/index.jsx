@@ -6,7 +6,7 @@ import { ReactComponent as DivisionLineSVG } from "../../../../assets/icon/divis
 function StarItem({ handleButton, star, setDeleteStarID }) {
   return (
     <S.Container>
-      <S.StarContainer isComplete={star.is_completed}>
+      <S.StarContainer isComplete={!star.is_completed}>
         <S.GarbageDivider>
           <S.EmoticonContainer>
             <S.Emoticon>{star.item.emoticon}</S.Emoticon>
@@ -38,6 +38,7 @@ function StarItem({ handleButton, star, setDeleteStarID }) {
             handleButton();
             setDeleteStarID(() => star.id);
           }}
+          isComplete={!star.is_completed}
         >
           <GarbageSVG />
         </S.IconBox>
