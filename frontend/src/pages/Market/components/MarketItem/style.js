@@ -6,7 +6,6 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 2rem 0;
 `;
 
 export const StarContainer = styled.div`
@@ -18,7 +17,9 @@ export const StarContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0 2rem;
+    margin-bottom: 2rem;
 `;
 
 export const AddDivider = styled.div `

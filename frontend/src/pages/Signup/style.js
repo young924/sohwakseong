@@ -42,8 +42,8 @@ export const SignupContainer = styled.div`
             max-width: 420px;
 
             > .label {
-                margin: 2rem 0;
-                color: black;
+                margin-bottom: 1rem;
+                color: #0A0B16;
             }
 
             > input {
