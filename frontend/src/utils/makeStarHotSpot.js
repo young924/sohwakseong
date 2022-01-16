@@ -1,6 +1,29 @@
 import styled, { css } from "styled-components";
 
-export const Container = styled.div`
+export const makeStarHotspot = (hotSpotDiv, args) => {
+  const starDiv = document.createElement("div");
+  starDiv.classList.add("star");
+  hotSpotDiv.appendChild(starDiv);
+  starDiv.style.width = "2rem";
+  starDiv.style.height = "2rem";
+  starDiv.style.boxShadow = "0px 0px 6px 2px #8A8686";
+  starDiv.style.backgroundColor = "#8A8686";
+  starDiv.style.borderRadius = "50%";
+  const line = document.createElement("div");
+  line.classList.add("line");
+  hotSpotDiv.appendChild(line);
+  const starInfo = document.createElement("p");
+  starInfo.innerHTML = args.title;
+  hotSpotDiv.appendChild(starInfo);
+  starInfo.style.visibility = "hidden";
+  const achvRate = document.createElement("p");
+  achvRate.classList.add("achv_rate");
+  achvRate.innerHTML = `(성취율 ${args.achvRate}%)`;
+  starInfo.appendChild(achvRate);
+  achvRate.style.visibility = "hidden";
+};
+
+export const StarContainer = styled.div`
   div.pnlm-dragfix {
     cursor: pointer;
   }
@@ -117,5 +140,3 @@ export const Container = styled.div`
     }
   }
 `;
-
-export const Table = styled.a``;

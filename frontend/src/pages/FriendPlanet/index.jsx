@@ -10,14 +10,15 @@ import { useQuery } from "react-query";
 import { starApi } from "../../api/star";
 import * as S from "./style";
 import { userApi } from "../../api/user";
+import { makeStarHotspot, StarContainer } from "../../utils/makeStarHotSpot";
 
 function FriendPlanet() {
   const { id } = useParams();
   const token = useToken();
   const { data: starList, isLoading } = useQuery(
     ["starList", id, token],
-    () => starApi.getStarListByUserId(id, token),
-    { enabled: !!(id || token) }
+    () => starApi.getStarListByUserId(id),
+    { enabled: !!id }
   );
 
   const { data: nickname } = useQuery(
@@ -41,30 +42,13 @@ function FriendPlanet() {
     }
   }, [clickedIndex]);
 
-  const CreatDoneHotspot = (hotSpotDiv, args) => {
-    const starDiv = document.createElement("div");
-    starDiv.classList.add("star");
-    hotSpotDiv.appendChild(starDiv);
-    starDiv.style.width = "2rem";
-    starDiv.style.height = "2rem";
-    starDiv.style.boxShadow = "0px 0px 6px 2px #8A8686";
-    starDiv.style.backgroundColor = "#8A8686";
-    starDiv.style.borderRadius = "50%";
-    const line = document.createElement("div");
-    line.classList.add("line");
-    hotSpotDiv.appendChild(line);
-    const starInfo = document.createElement("p");
-    starInfo.innerHTML = args.title;
-    hotSpotDiv.appendChild(starInfo);
-    starInfo.style.display = "none";
-  };
   if (isLoading) {
     return <Loading />;
   }
   return (
     <>
       <Header type="friendPlanet" content={`${nickname}의 행성`} />
-      <S.Container clickedIndex={clickedIndex}>
+      <StarContainer clickedIndex={clickedIndex}>
         {isPannelLoading && <Loading />}
 
         <Pannellum
@@ -97,13 +81,16 @@ function FriendPlanet() {
                   ? `done${String(index + 1)} done`
                   : `ing${String(index + 1)} ing`
               }
-              tooltip={CreatDoneHotspot}
-              tooltipArg={{ title: "미라클 모닝" }}
+              tooltip={makeStarHotspot}
+              tooltipArg={{
+                title: star?.item?.title || "",
+                achvRate: star?.achv_rate,
+              }}
             />
           ))}
         </Pannellum>
         <Planet />
-      </S.Container>
+      </StarContainer>
     </>
   );
 }

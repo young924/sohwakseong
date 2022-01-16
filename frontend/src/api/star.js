@@ -1,16 +1,10 @@
 import axios from "axios";
 
 export const starApi = {
-  getStarListByUserId: async (userId, token) => {
-    const { data: starList } = await axios.get("/star-api/stars", {
-      params: {
-        filter: "user_id",
-        user_id: userId,
-      },
-      headers: {
-        Authorization: token,
-      },
-    });
+  getStarListByUserId: async (userId) => {
+    const { data: starList } = await axios.get(
+      `/star-api/users/${userId}/stars/`
+    );
     return starList;
   },
   getMyStarList: async (token) => {
@@ -39,6 +33,14 @@ export const starApi = {
         },
       }
     );
+    return data;
+  },
+  deleteStar: async (starId, token) => {
+    const { data } = await axios.delete(`/star-api/stars/${starId}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
     return data;
   },
 };

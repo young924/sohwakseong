@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import useMount from "../../../../hooks/useMount";
-
+import StarItem from "../StarItem";
 import * as S from "./style";
 
-function BottomModal() {
+function BottomModal({
+  handleButton,
+  setDeleteStar,
+  starList,
+  setDeleteStarID,
+}) {
   const isMount = useMount();
   const [isComplete, setIsComplete] = useState(false);
   const [isNoticeOn, setIsNoticeOn] = useState(true);
@@ -24,6 +29,37 @@ function BottomModal() {
           진행 완료
         </S.Tab>
       </S.TabWrapper>
+
+      {!isComplete &&
+        starList.map(
+          (star, index) =>
+            star.is_completed === false && (
+              <StarItem
+                key={index}
+                handleButton={handleButton}
+                star={star}
+                index={index}
+                setdeleteStar={setDeleteStar}
+                setDeleteStarID={setDeleteStarID}
+              />
+            )
+        )}
+
+      {isComplete &&
+        starList.map(
+          (star, index) =>
+            star.is_completed && (
+              <StarItem
+                key={index}
+                handleButton={handleButton}
+                star={star}
+                index={index}
+                setdeleteStar={setDeleteStar}
+                setDeleteStarID={setDeleteStarID}
+              />
+            )
+        )}
+
       <S.Notice isNoticeOn={isNoticeOn}>
         *소확성을 꾸준히 달성하면 행성에 누군가가 놀러옵니다~!
       </S.Notice>

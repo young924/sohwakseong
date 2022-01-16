@@ -12,6 +12,9 @@ export const CalendarWrapper = styled.section`
     border-radius: 2rem;
     padding: 1.2rem;
   }
+  .react-calendar__navigation {
+    height: 1.6rem;
+  }
   .react-calendar__navigation__label__labelText {
     font-size: 1.6rem;
   }
@@ -38,9 +41,9 @@ export const Background = styled.div`
   margin: auto;
   width: 100%;
   max-width: 420px;
-  background-color: #E6E7E8;
+  background-color: #e6e7e8;
   opacity: 0.6;
-  height: 45vh;
+  height: calc(100vh - 400px);
 `;
 
 export const StarsContainer = styled.div`
@@ -51,7 +54,7 @@ export const StarsContainer = styled.div`
   margin: auto;
   width: 100%;
   max-width: 420px;
-  height: 45vh;
+  height: calc(100vh - 400px);
   color: black;
 
   > .stars {
@@ -62,7 +65,7 @@ export const StarsContainer = styled.div`
     height: 100%;
     overflow: scroll;
     border-top: 0.2rem solid white;
-    
+
     > .star {
       display: flex;
       align-items: center;
@@ -103,5 +106,4 @@ export const StarsContainer = styled.div`
       }
     }
   }
-
 `;

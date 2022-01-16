@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const Container = styled.section`
   width: 100%;
   height: 0;
-  background-color: #53545c;
+  background: rgba(83, 84, 92, 0.8);
   border-radius: 4rem 4rem 0 0;
   opacity: 0;
   transition: all 0.45s ease-in-out;
@@ -12,7 +12,7 @@ export const Container = styled.section`
     isMount &&
     css`
       height: 70vh;
-      opacity: 0.85;
+      opacity: 1;
     `}
 `;
 
@@ -22,6 +22,7 @@ export const TabWrapper = styled.div`
   justify-content: space-around;
   width: 100%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+
 `;
 
 export const Tab = styled.div`
@@ -53,6 +54,7 @@ export const Notice = styled.p`
   margin: 0;
   text-align: center;
   font-size: 1.4rem;
+  font-weight: 900;
   color: #ffd57c;
   opacity: 1;
   transition: all 0.5s linear;

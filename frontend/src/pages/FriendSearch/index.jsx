@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Header from "../../components/Header";
 import SearchBar from "../../components/SearchBar";
 import PageLayout from "../../components/PageLayout";
@@ -7,12 +7,16 @@ import { useInput } from "../../hooks/useInput";
 import axios from "axios";
 import { ReactComponent as Arrow } from "../../assets/icon/arrow.svg";
 import * as S from "./style";
+import prince1Img from "../../assets/image/prince1.png";
+import prince2Img from "../../assets/image/prince2.png";
+import prince3Img from "../../assets/image/prince3.png";
+import prince4Img from "../../assets/image/prince4.png";
 
 function FriendSearch() {
   const history = useHistory();
-
-  const [users, setUsers] = useState([{ id: 0, nickname: '' }]);
-  const [searchInput, handleSearchInput] = useInput('');
+  const imageList = [prince1Img, prince2Img, prince3Img, prince4Img];
+  const [users, setUsers] = useState([{ id: 0, nickname: "" }]);
+  const [searchInput, handleSearchInput] = useInput("");
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -20,18 +24,19 @@ function FriendSearch() {
       alert("닉네임을 입력하세요!");
       return;
     }
-    axios.get(`/account-api/users/?word=${searchInput}`)
-      .then(res => {
+    axios
+      .get(`/account-api/users/?word=${searchInput}`)
+      .then((res) => {
         setUsers(res.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
 
   const onClickUser = (id) => {
     history.push(`/friendplanet/${id}/`);
-  }
+  };
 
   return (
     <PageLayout>
@@ -48,17 +53,23 @@ function FriendSearch() {
         )}
       </S.NoResult>
       <S.UsersContainer>
-        {users.length > 0 && users[0].id !== 0 && users.map((user) => {
-          return (
-            <div key={user.id} className="user-container" onClick={() => onClickUser(user.id)}>
-              <div className="user-content">
-                <div className="user-image"></div>
-                <div className="user-nickname">{user.nickname}</div>
+        {users.length > 0 &&
+          users[0].id !== 0 &&
+          users.map((user) => {
+            return (
+              <div
+                key={user.id}
+                className="user-container"
+                onClick={() => onClickUser(user.id)}
+              >
+                <S.UserContent className="user-content">
+                  <img src={imageList[user.id % 4]} />
+                  <div className="user-nickname">{user.nickname}</div>
+                </S.UserContent>
+                <Arrow />
               </div>
-              <Arrow />
-            </div>
-          );
-        })}
+            );
+          })}
       </S.UsersContainer>
     </PageLayout>
   );

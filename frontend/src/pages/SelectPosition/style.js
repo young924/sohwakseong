@@ -35,15 +35,24 @@ export const Container = styled.div`
 
     > p {
       display: block !important;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.2);
+      font-weight: 500;
       width: fit-content;
       border-radius: 1.5rem;
       color: white;
       padding: 1rem;
       margin: 0;
       margin-top: 2rem;
-      margin-left: -2rem;
+      margin-left: -3.5rem;
       z-index: 100000;
+
+      > p {
+        font-weight: 700;
+        margin: 0;
+        color: white;
+        display: block !important;
+        text-align: center;
+      }
     }
   }
 
@@ -87,15 +96,24 @@ export const Container = styled.div`
 
     > p {
       display: block !important;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.2);
+      font-weight: 500;
       width: fit-content;
       border-radius: 1.5rem;
       color: white;
       padding: 1rem;
       margin: 0;
       margin-top: 2rem;
-      margin-left: -2rem;
+      margin-left: -3.5rem;
       z-index: 100000;
+
+      > p {
+        font-weight: 700;
+        margin: 0;
+        color: white;
+        display: block !important;
+        text-align: center;
+      }
     }
   }
 `;

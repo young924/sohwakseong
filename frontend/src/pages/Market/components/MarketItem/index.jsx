@@ -2,15 +2,18 @@ import React, { useMemo } from 'react';
 import { ReactComponent as AddToCart } from '../../../../assets/icon/addToCart.svg';
 import * as S from './style'
 
-function MarketItem({ emoticon='⭐️', starName='별 이름', userCount=0, setIsCartStarModalOn }) {
+function MarketItem({ emoticon='⭐️', itemId=0, starName='별 이름', userCount=0, setIsCartStarModalOn, setItemIdForModal, setItemNameForModal, setEmoticonForModal }) {
   const Margin = useMemo(() => ({
     margin: '0.5rem',
     marginRight: '10rem',
   }));
 
   const onClickCart = () => {
+    setItemIdForModal(itemId);
+    setEmoticonForModal(emoticon);
+    setItemNameForModal(starName)
     setIsCartStarModalOn(true);
-  }
+  };
 
   return (
   <>
