@@ -7,16 +7,23 @@ import * as S from "./style";
 import Header from "../../components/Header";
 import SearchModal from "./components/SearchModal";
 import { useHistory } from "react-router-dom";
+import { useQuery } from "react-query";
+import useToken from "../../hooks/useToken";
+import { starApi } from "../../api/star";
+import { makeStarHotspot, StarContainer } from "../../utils/makeStarHotSpot";
 
 function Home() {
   const history = useHistory();
+  const token = useToken();
   const [isSearchModalOn, setIsSearchModalOn] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isPannelLoading, setIsPannelLoading] = useState(true);
   const [position, setPosition] = useState({ hfov: 100, pitch: 100, yaw: 100 });
-  const [starList, setStarList] = useState([
-    { yaw: 10, pitch: 100 },
-    { yaw: 10, pitch: 120 },
-  ]);
+
+  const { data: starList, isLoading } = useQuery(
+    ["starList", token],
+    () => starApi.getMyStarList(token),
+    { enabled: !!token }
+  );
   const [clickedIndex, setClickedIndex] = useState(0);
   const [planetClickedIndex, setPlanetClickedIndex] = useState(0);
 
@@ -31,30 +38,16 @@ function Home() {
     }
   }, [clickedIndex]);
 
-  const CreatDoneHotspot = (hotSpotDiv, args) => {
-    const starDiv = document.createElement("div");
-    starDiv.classList.add("star");
-    hotSpotDiv.appendChild(starDiv);
-    starDiv.style.width = "2rem";
-    starDiv.style.height = "2rem";
-    starDiv.style.boxShadow = "0px 0px 6px 2px #8A8686";
-    starDiv.style.backgroundColor = "#8A8686";
-    starDiv.style.borderRadius = "50%";
-    const line = document.createElement("div");
-    line.classList.add("line");
-    hotSpotDiv.appendChild(line);
-    const starInfo = document.createElement("p");
-    starInfo.innerHTML = args.title;
-    hotSpotDiv.appendChild(starInfo);
-    starInfo.style.display = "none";
-  };
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
       <Header type="home" handleButton={() => history.push("/friendsearch")} />
       <SearchModal isOpen={isSearchModalOn} setIsOpen={setIsSearchModalOn} />
-      <S.Container clickedIndex={clickedIndex}>
-        {isLoading && <Loading />}
+      <StarContainer clickedIndex={clickedIndex}>
+        {isPannelLoading && <Loading />}
 
         <Pannellum
           ref={panImage}
@@ -68,7 +61,7 @@ function Home() {
           minHfov={50}
           autoLoad
           showZoomCtrl={false}
-          onLoad={() => setIsLoading(false)}
+          onLoad={() => setIsPannelLoading(false)}
           showFullscreenCtrl={false}
           hotSpotDebug
           disabledKeyboardCtrl={false}
@@ -84,9 +77,16 @@ function Home() {
               yaw={star.yaw}
               handleClick={(evt, index) => setClickedIndex(() => index)}
               handleClickArg={Number(index + 1)}
-              cssClass={`done${String(index + 1)} done`}
-              tooltip={CreatDoneHotspot}
-              tooltipArg={{ title: "미라클 모닝 7am" }}
+              cssClass={
+                star.is_completed
+                  ? `done${String(index + 1)} done`
+                  : `ing${String(index + 1)} ing`
+              }
+              tooltip={makeStarHotspot}
+              tooltipArg={{
+                title: star?.item?.title || "",
+                achvRate: star?.achv_rate ?? "",
+              }}
             />
           ))}
         </Pannellum>
@@ -94,7 +94,7 @@ function Home() {
           clickedIndex={planetClickedIndex}
           setClickedIndex={setPlanetClickedIndex}
         />
-      </S.Container>
+      </StarContainer>
     </>
   );
 }

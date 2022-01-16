@@ -8,7 +8,7 @@ function Loading() {
     <PageLayout>
       <S.Container>
         <img src={loadingImg} />
-        로딩 중...
+        로딩 중
       </S.Container>
     </PageLayout>
   );

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import { userApi } from "../../api/user";
 import { starApi } from "../../api/star";
@@ -12,6 +11,7 @@ import Loading from "../../components/Loading";
 import Planet from "../../components/Planet";
 import ConfirmModal from "./components/ConfirmModal";
 import useMobileCheck from "../../hooks/useMobileCheck";
+import { makeStarHotspot, StarContainer } from "../../utils/makeStarHotSpot";
 
 function SelectPosition() {
   const token = useToken();
@@ -54,24 +54,6 @@ function SelectPosition() {
     window.addEventListener("dblclick", handleNewStar);
   }, []);
 
-  const CreatDoneHotspot = (hotSpotDiv, args) => {
-    const starDiv = document.createElement("div");
-    starDiv.classList.add("star");
-    hotSpotDiv.appendChild(starDiv);
-    starDiv.style.width = "2rem";
-    starDiv.style.height = "2rem";
-    starDiv.style.boxShadow = "0px 0px 6px 2px #8A8686";
-    starDiv.style.backgroundColor = "#8A8686";
-    starDiv.style.borderRadius = "50%";
-    const line = document.createElement("div");
-    line.classList.add("line");
-    hotSpotDiv.appendChild(line);
-    const starInfo = document.createElement("p");
-    starInfo.innerHTML = args.title;
-    hotSpotDiv.appendChild(starInfo);
-    starInfo.style.display = "none";
-  };
-
   const [isConfirmModalOn, setIsConfirmModalOn] = useState(false);
 
   const onMousedown = (event) => {
@@ -111,7 +93,7 @@ function SelectPosition() {
         newStar={newStar}
         setIsPannelLoading={setIsPannelLoading}
       />
-      <S.Container clickedIndex={clickedIndex} isOpen={isConfirmModalOn}>
+      <StarContainer clickedIndex={clickedIndex} isOpen={isConfirmModalOn}>
         {isPannelLoading && <Loading />}
 
         <Pannellum
@@ -146,13 +128,13 @@ function SelectPosition() {
                   ? `done${String(index + 1)} done`
                   : `ing${String(index + 1)} ing`
               }
-              tooltip={CreatDoneHotspot}
+              tooltip={makeStarHotspot}
               tooltipArg={{ title: star?.item?.title || "" }}
             />
           ))}
         </Pannellum>
         <Planet isMobile={isMobile} />
-      </S.Container>
+      </StarContainer>
     </>
   );
 }
