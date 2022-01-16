@@ -35,4 +35,12 @@ export const starApi = {
     );
     return data;
   },
+  deleteStar: async (starId, token) => {
+    const { data } = await axios.delete(`/star-api/stars/${starId}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return data;
+  },
 };
