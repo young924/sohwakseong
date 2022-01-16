@@ -7,7 +7,7 @@ export const Container = styled.section`
   justify-content: center;
   background-color: #E6E7E8;
   gap: 1.6rem;
-  padding: 3rem;
+  padding: 1rem;
   border-radius: 2.5rem;
 
   > h2 {
@@ -31,11 +31,15 @@ export const ImoticonContainer = styled.div`
 
 export const ImoticonHolder = styled.div`
   background-color: #FFFFFF;
-  box-shadow: 0px 0px 17px 3px rgba(0,0,0,0.23);
+  box-shadow: 0px 0px 14px -7px #000000;
   width: 6rem;
   height: 6rem;
   border-radius: 5rem;
   margin: 0;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   `
 
 export const InputWrapper = styled.div`

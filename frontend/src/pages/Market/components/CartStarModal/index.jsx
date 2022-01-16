@@ -1,14 +1,22 @@
 import React, { useMemo } from "react";
+import axios from "axios";
+import { useHistory } from 'react-router-dom';
 
 import { useInput } from "../../../../hooks/useInput";
 import Modal from "../../../../components/Modal";
 import * as S from "./style";
+import { ReactComponent as RightArrow } from "../../../../assets/icon/rightArrow.svg"
 
-function CartStarModal({isOpen, setIsOpen, emoticon="⭐️", starName="별 이름"}) {
+function CartStarModal({isOpen, setIsOpen, itemId, emoticon="⭐️", starName="별 이름"}) {
   const modalColor = useMemo(() => ({
     backgroundColor: "#E6E7E8"
   }))
   const [targetNumber, handleTargetNumber] = useInput(1);
+
+  // const history = useHistory();
+  // history.push({
+  //             pathname: `/select/${itemId}/${targetNumber}`,
+  //           });
 
   return (
     <Modal
@@ -35,6 +43,7 @@ function CartStarModal({isOpen, setIsOpen, emoticon="⭐️", starName="별 이�
           onChange={handleTargetNumber}
           />
         </S.InputWrapper>
+        <RightArrow />
       </S.Container>
 
     </Modal>
