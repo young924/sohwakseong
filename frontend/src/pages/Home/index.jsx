@@ -23,14 +23,17 @@ function Home() {
   useEffect(() => {
     if (location.state) {
       setPosition({ pitch: location.state.pitch, yaw: location.state.yaw });
+      refetch();
     }
   }, [location]);
 
-  const { data: starList, isLoading } = useQuery(
-    ["starList", token],
-    () => starApi.getMyStarList(token),
-    { enabled: !!token }
-  );
+  const {
+    data: starList,
+    isLoading,
+    refetch,
+  } = useQuery(["starList", token], () => starApi.getMyStarList(token), {
+    enabled: !!token,
+  });
   const [clickedIndex, setClickedIndex] = useState(0);
   const [planetClickedIndex, setPlanetClickedIndex] = useState(0);
 
