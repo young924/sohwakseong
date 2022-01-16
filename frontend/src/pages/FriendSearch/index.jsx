@@ -14,7 +14,7 @@ function FriendSearch() {
   const [users, setUsers] = useState([{ id: 0, nickname: '' }]);
   const [searchInput, handleSearchInput] = useInput('');
 
-  const handleSearchButton = () => {
+  const handleSearch = () => {
     if (searchInput === "") {
       alert("닉네임을 입력하세요!");
       return;
@@ -39,7 +39,7 @@ function FriendSearch() {
         placeholder={"닉네임 검색"}
         input={searchInput}
         handleInput={handleSearchInput}
-        handleSearchButton={handleSearchButton}
+        handleSearch={handleSearch}
       />
       <S.NoResult>
         {users.length === 0 && (
