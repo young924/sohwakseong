@@ -57,14 +57,65 @@ function Market() {
   };
 
   const showStarItems = (() => {
-    return starItems.map((item)=>(
+    return starItems.map((item)=>(<>
     <MarketItem
       key={item.id}
       emoticon={item.emoticon}
       starName={item.title}
       userCount={item.user_count}
       setIsCartStarModalOn={setIsCartStarModalOn}
-      />));
+      />
+      <MarketItem
+      key={item.id}
+      emoticon={item.emoticon}
+      starName={item.title}
+      userCount={item.user_count}
+      setIsCartStarModalOn={setIsCartStarModalOn}
+      />
+      <MarketItem
+      key={item.id}
+      emoticon={item.emoticon}
+      starName={item.title}
+      userCount={item.user_count}
+      setIsCartStarModalOn={setIsCartStarModalOn}
+      />
+      <MarketItem
+      key={item.id}
+      emoticon={item.emoticon}
+      starName={item.title}
+      userCount={item.user_count}
+      setIsCartStarModalOn={setIsCartStarModalOn}
+      />
+      <MarketItem
+      key={item.id}
+      emoticon={item.emoticon}
+      starName={item.title}
+      userCount={item.user_count}
+      setIsCartStarModalOn={setIsCartStarModalOn}
+      />
+      <MarketItem
+      key={item.id}
+      emoticon={item.emoticon}
+      starName={item.title}
+      userCount={item.user_count}
+      setIsCartStarModalOn={setIsCartStarModalOn}
+      />
+      <MarketItem
+      key={item.id}
+      emoticon={item.emoticon}
+      starName={item.title}
+      userCount={item.user_count}
+      setIsCartStarModalOn={setIsCartStarModalOn}
+      />
+      <MarketItem
+      key={item.id}
+      emoticon={item.emoticon}
+      starName={item.title}
+      userCount={item.user_count}
+      setIsCartStarModalOn={setIsCartStarModalOn}
+      />
+      </>
+      ));
   })();
 
   return (
