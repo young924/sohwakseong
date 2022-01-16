@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import PageLayout from "../../components/PageLayout";
-import "./style.css";
+import * as S from "./style";
 import { useSetRecoilState } from "recoil";
 import { loginState } from "../../hooks/useUserInfo";
 import loginStarsPNG from "../../assets/image/login-stars.png";
@@ -61,7 +61,7 @@ function Login() {
 
   return (
     <PageLayout>
-      <div className="login-container">
+      <S.LoginContainer>
         <img className="star-img" src={loginStarsPNG} alt="stars" />
         <h1 className="login-title">갓생살기</h1>
         <div className="login-inputs-background"></div>
@@ -95,7 +95,7 @@ function Login() {
             회원가입
           </div>
         </div>
-      </div>
+      </S.LoginContainer>
     </PageLayout>
   );
 }
