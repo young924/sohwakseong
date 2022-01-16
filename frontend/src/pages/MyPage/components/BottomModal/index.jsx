@@ -33,7 +33,7 @@ function BottomModal({
       {!isComplete &&
         starList.map(
           (star, index) =>
-            star.is_completed === false && (
+            star.is_completed && (
               <StarItem
                 key={index}
                 handleButton={handleButton}
@@ -48,7 +48,7 @@ function BottomModal({
       {isComplete &&
         starList.map(
           (star, index) =>
-            star.is_completed && (
+            !star.is_completed && (
               <StarItem
                 key={index}
                 handleButton={handleButton}

@@ -12,4 +12,19 @@ export const starItemApi = {
     });
     return starList;
   },
+  createStarItem: async (starName, emoticon, token) => {
+    const { data } = await axios.post(
+      "/star-api/star-items/",
+      {
+        title: starName,
+        emoticon: emoticon,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    return data;
+  },
 };

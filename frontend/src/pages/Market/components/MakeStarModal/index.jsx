@@ -1,14 +1,30 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import Modal from "../../../../components/Modal";
 import { ReactComponent as CheckSVG } from "../../../../assets/icon/checkCircle.svg";
 import Picker from "emoji-picker-react";
 import { useInput } from "../../../../hooks/useInput";
 import * as S from "./style";
+import { useMutation } from "react-query";
+import { starItemApi } from "../../../../api/StarItem";
+import useToken from "../../../../hooks/useToken";
 
-function MakeStarModal({ isOpen, setIsOpen }) {
+function MakeStarModal({ isOpen, setIsOpen, refetch }) {
   const [isEmojiPickerOn, setIsEmojiPickerOn] = useState(false);
   const [emoji, setEmoji] = useState(null);
   const [starName, handleStarName, setStarName] = useInput("");
+  const token = useToken();
+
+  const { mutateAsync: createStarItem } = useMutation(
+    () => starItemApi.createStarItem(starName, emoji, token),
+    {
+      onSuccess: () => {
+        refetch();
+        setStarName("");
+        setEmoji(null);
+        setIsOpen(false);
+      },
+    }
+  );
 
   const onEmojiClick = (event, emojiObject) => {
     setEmoji(() => emojiObject.emoji);
@@ -24,12 +40,9 @@ function MakeStarModal({ isOpen, setIsOpen }) {
       alert("이모티콘을 선택해주세요");
       return;
     }
+    createStarItem();
 
     // todo: api 요청
-
-    setStarName("");
-    setEmoji(null);
-    setIsOpen(false);
   }, [starName, emoji]);
 
   return (

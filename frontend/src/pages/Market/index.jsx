@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useQuery } from "react-query";
 
 import PageLayout from "../../components/PageLayout";
@@ -16,62 +16,72 @@ import useToken from "../../hooks/useToken";
 
 function Market() {
   const token = useToken();
-  const { data: starItemData, isLoading: isStarLoading } = useQuery(
+  const {
+    data: starItemData,
+    isLoading: isStarLoading,
+    refetch,
+  } = useQuery(
     ["starItemData", token],
     () => starItemApi.getStarItemList(token),
     { enabled: !!token }
   );
-  
+
   const [isMakeStarModalOn, setIsMakeStarModalOn] = useState(false);
   const [isCartStarModalOn, setIsCartStarModalOn] = useState(false);
   const [searchInput, handleSearchInput] = useInput();
   const [starItems, setStarItems] = useState([]);
 
   const [itemIdForMadal, setItemIdForModal] = useState(0);
-  const [emoticonForMadal, setEmoticonForModal] = useState('⭐️');
-  const [itemNameForMadal, setItemNameForModal] = useState('별 이름');
+  const [emoticonForMadal, setEmoticonForModal] = useState("⭐️");
+  const [itemNameForMadal, setItemNameForModal] = useState("별 이름");
 
   useEffect(() => {
     if (starItemData) {
-      setStarItems(starItemData);
+      setStarItems(() => starItemData);
     }
-  }, [starItemData])
-  
+  }, [starItemData]);
+
   if (isStarLoading) {
     return <Loading />;
   }
-  
+
   const handleSearch = (e) => {
-    e.preventDefault()
-    axios.get('/star-api/star-items/', {
-      params: {
-        filter: 'search',
-        word: searchInput,
-      }
-    })
-    .then((res) => {
-      console.log(res.data);
-      setStarItems(res.data);
-    })
-    .catch((e) => {
-      if (e.response.status === 400) {
-        alert('검색어를 입력하세요')
-      }
-    });
+    e.preventDefault();
+    axios
+      .get("/star-api/star-items/", {
+        params: {
+          filter: "search",
+          word: searchInput,
+        },
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setStarItems(() => res.data);
+      })
+      .catch((e) => {
+        if (e.response.status === 400) {
+          alert("검색어를 입력하세요");
+        }
+      });
   };
 
   const showStarItems = (() => {
-    return starItems.map((item)=>(
-    <MarketItem
-      key={item.id}
-      emoticon={item.emoticon}
-      starName={item.title}
-      userCount={item.user_count}
-      setIsCartStarModalOn={setIsCartStarModalOn}
-      setItemIdForModal={setItemIdForModal}
-      setEmoticonForModal={setEmoticonForModal}
-      setItemNameForModal={setItemNameForModal}
-      />));
+    return starItems.map((item) => (
+      <MarketItem
+        key={item.id}
+        itemId={item.id}
+        emoticon={item.emoticon}
+        starName={item.title}
+        userCount={item.user_count}
+        setIsCartStarModalOn={setIsCartStarModalOn}
+        setItemIdForModal={setItemIdForModal}
+        setEmoticonForModal={setEmoticonForModal}
+        setItemNameForModal={setItemNameForModal}
+      />
+    ));
   })();
 
   return (
@@ -79,6 +89,7 @@ function Market() {
       <MakeStarModal
         isOpen={isMakeStarModalOn}
         setIsOpen={setIsMakeStarModalOn}
+        refetch={refetch}
       />
       <CartStarModal
         itemId={itemIdForMadal}
@@ -98,9 +109,7 @@ function Market() {
         handleInput={handleSearchInput}
         handleSearch={handleSearch}
       />
-      <S.StarItemsContainer>
-        {showStarItems}
-      </S.StarItemsContainer>
+      <S.StarItemsContainer>{showStarItems}</S.StarItemsContainer>
     </PageLayout>
   );
 }

@@ -18,7 +18,14 @@ function ConfirmModal({
   const { yaw, pitch } = newStar;
   const token = useToken();
   const { mutateAsync: createStar } = useMutation(
-    () => starApi.createMyStar(item, target_number, yaw, pitch, token),
+    () =>
+      starApi.createMyStar(
+        Number(item),
+        Number(target_number),
+        yaw,
+        pitch,
+        token
+      ),
     {
       onSuccess: () => history.push("/"),
     }
