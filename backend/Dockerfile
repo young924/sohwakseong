@@ -7,3 +7,7 @@ COPY requirements.txt .
 COPY . .
 
 RUN pip install -r requirements.txt
+RUN pip install uwsgi
+CMD uwsgi \
+--wsgi-file /app/sohwakseong/wsgi.py \
+--http :8000
