@@ -25,18 +25,24 @@ function MarketItem({
   };
 
   return (
-    <>
-      <S.Container>
-        <S.EmoticonContainer>
-          <S.Emoticon>{emoticon}</S.Emoticon>
-        </S.EmoticonContainer>
-        <S.Div>
-          <h3 style={Margin}>{starName}</h3>
-          <p style={Margin}>담은 사람: {userCount}명</p>
-        </S.Div>
-        <AddToCart onClick={onClickCart} />
-      </S.Container>
-    </>
+    <S.Container>
+      <S.StarContainer>
+        <S.AddDivider>
+          <S.EmoticonContainer>
+            <S.Emoticon>{emoticon}</S.Emoticon>
+          </S.EmoticonContainer>
+
+          <S.StarInfoContainer>
+            <S.StarName style={Margin}>{starName}</S.StarName>
+            <S.StarAddedCount style={Margin}>담은 사람: {userCount}명</S.StarAddedCount>
+          </S.StarInfoContainer>
+        </S.AddDivider>
+
+        <S.IconBox>
+          <AddToCart onClick={onClickCart}/>
+        </S.IconBox>
+      </S.StarContainer>
+    </S.Container>
   );
 }
 

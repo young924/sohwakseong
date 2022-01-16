@@ -23,7 +23,6 @@ const GlobalStyleWrapper = createGlobalStyle`
       font-size: 7.5px;
     }
   }
- 
 
   body { 
     padding: 0;
