@@ -7,16 +7,19 @@ import Modal from "../../../../components/Modal";
 import * as S from "./style";
 import { ReactComponent as RightArrow } from "../../../../assets/icon/rightArrow.svg"
 
-function CartStarModal({isOpen, setIsOpen, itemId, emoticon="⭐️", starName="별 이름"}) {
+function CartStarModal({isOpen, setIsOpen, itemId=0, emoticon="⭐️", itemName="별 이름"}) {
   const modalColor = useMemo(() => ({
     backgroundColor: "#E6E7E8"
   }))
   const [targetNumber, handleTargetNumber] = useInput(1);
 
-  // const history = useHistory();
-  // history.push({
-  //             pathname: `/select/${itemId}/${targetNumber}`,
-  //           });
+  const history = useHistory();
+  const pushToSelect = () => {
+    console.log('??')
+    history.push({
+                pathname: `/select/${itemId}/${targetNumber}`,
+              });
+  }
 
   return (
     <Modal
@@ -30,7 +33,7 @@ function CartStarModal({isOpen, setIsOpen, itemId, emoticon="⭐️", starName="
           <S.ImoticonHolder>
           {emoticon}
           </S.ImoticonHolder>
-          <p>{starName}</p>
+          <p>{itemName}</p>
         </S.ImoticonContainer>
 
         <S.InputWrapper>
@@ -43,7 +46,7 @@ function CartStarModal({isOpen, setIsOpen, itemId, emoticon="⭐️", starName="
           onChange={handleTargetNumber}
           />
         </S.InputWrapper>
-        <RightArrow />
+        <RightArrow onClick={pushToSelect} />
       </S.Container>
 
     </Modal>
