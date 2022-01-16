@@ -24,7 +24,6 @@ function App() {
         <Suspense fallback={<>로딩</>}>
           <QueryClientProvider client={queryClient}>
             <Router />
-            <ReactQueryDevtools initialIsOpen={false} />
           </QueryClientProvider>
         </Suspense>
       </RecoilRoot>
