@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
 
 export const Container = styled.div`
+    max-height: 100vh;
+
     > img {
         width: 100%;
     }

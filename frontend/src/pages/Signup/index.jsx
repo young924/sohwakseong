@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import PageLayout from "../../components/PageLayout";
+import "./style.css";
 
 function Signup() {
   const history = useHistory();
@@ -72,8 +73,9 @@ function Signup() {
 
   return (
     <PageLayout>
+      <div className="signup-background"></div>
       <div className="signup-container">
-        <div>회원가입</div>
+        <div> 회원가입</div>
         <div className="label">닉네임</div>
         <input
           id="nickname"

@@ -6,8 +6,6 @@ import welcomePNG from "../../assets/image/welcome.png"
 function Welcome() {
     const history = useHistory();
 
-
-
     return (
         <S.Container>
             <img src={welcomePNG} alt="background"></img>
